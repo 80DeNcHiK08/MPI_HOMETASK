@@ -1,6 +1,6 @@
 ﻿// SIP.UI.cpp : Defines the entry point for the application.
 //
-
+#include <iostream>
 #include "framework.h"
 #include "SIP.UI.h"
 

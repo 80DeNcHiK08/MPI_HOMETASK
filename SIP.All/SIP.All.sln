@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29324.140
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SIP.UI", "SIP.UI\SIP.UI.vcxproj", "{03D30803-89EA-42A4-AE0F-DD8414501CB7}"
 EndProject
@@ -15,16 +15,16 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{03D30803-89EA-42A4-AE0F-DD8414501CB7}.Debug|x64.ActiveCfg = Debug|x64
-		{03D30803-89EA-42A4-AE0F-DD8414501CB7}.Debug|x64.Build.0 = Debug|x64
+		{03D30803-89EA-42A4-AE0F-DD8414501CB7}.Debug|x64.ActiveCfg = Debug|Win32
+		{03D30803-89EA-42A4-AE0F-DD8414501CB7}.Debug|x64.Build.0 = Debug|Win32
 		{03D30803-89EA-42A4-AE0F-DD8414501CB7}.Debug|x86.ActiveCfg = Debug|Win32
 		{03D30803-89EA-42A4-AE0F-DD8414501CB7}.Debug|x86.Build.0 = Debug|Win32
 		{03D30803-89EA-42A4-AE0F-DD8414501CB7}.Release|x64.ActiveCfg = Release|x64
 		{03D30803-89EA-42A4-AE0F-DD8414501CB7}.Release|x64.Build.0 = Release|x64
 		{03D30803-89EA-42A4-AE0F-DD8414501CB7}.Release|x86.ActiveCfg = Release|Win32
 		{03D30803-89EA-42A4-AE0F-DD8414501CB7}.Release|x86.Build.0 = Release|Win32
-		{9D31CAA5-E27F-4183-AE87-4B9220137ADB}.Debug|x64.ActiveCfg = Debug|x64
-		{9D31CAA5-E27F-4183-AE87-4B9220137ADB}.Debug|x64.Build.0 = Debug|x64
+		{9D31CAA5-E27F-4183-AE87-4B9220137ADB}.Debug|x64.ActiveCfg = Debug|Win32
+		{9D31CAA5-E27F-4183-AE87-4B9220137ADB}.Debug|x64.Build.0 = Debug|Win32
 		{9D31CAA5-E27F-4183-AE87-4B9220137ADB}.Debug|x86.ActiveCfg = Debug|Win32
 		{9D31CAA5-E27F-4183-AE87-4B9220137ADB}.Debug|x86.Build.0 = Debug|Win32
 		{9D31CAA5-E27F-4183-AE87-4B9220137ADB}.Release|x64.ActiveCfg = Release|x64
