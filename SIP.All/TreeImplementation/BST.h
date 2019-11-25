@@ -103,6 +103,10 @@ class BST
 		std::cout << "Key: " << t->key << " " << "Val: " << t->value << " ";
 		inorder(t->Right);
 	}
+
+	void iterate_in(Node *n);
+	void iterate_pre(Node *n);
+	void iterate_post(Node *n);
 public:
 	BST();
 	~BST();
