@@ -6,10 +6,19 @@ class BST
 	struct Node {
 		Node* Left;
 		Node* Right;
+		int key;
 		int value;
 	};
 	Node* root;
 
+	Node *newNode(int x, int v)
+	{
+		Node *temp = new Node;
+		temp->key = x;
+		temp->value = v;
+		temp->Left = temp->Right = NULL;
+		return temp;
+	}
 	Node* freeSpace(Node* t)
 	{
 		if (t == NULL)
@@ -21,19 +30,15 @@ class BST
 		}
 		return NULL;
 	}
-	Node* insert(int x, Node* t)
+	Node* insert(int key, int value, Node* node)
 	{
-		if (t == NULL)
-		{
-			t = new Node;
-			t->value = x;
-			t->Left = t->Right = NULL;
-		}
-		else if (x < t->value)
-			t->Left = insert(x, t->Left);
-		else if (x > t->value)
-			t->Right = insert(x, t->Right);
-		return t;
+		if (node == NULL) return newNode(key, value);
+
+		if (key < node->key)
+			node->Left = insert(key, value, node->Left);
+		else if (key > node->key)
+			node->Right = insert(key, value, node->Right);
+		return node;
 	}
 	Node* findMin(Node* t)
 	{
@@ -58,15 +63,15 @@ class BST
 		Node* temp;
 		if (t == NULL)
 			return NULL;
-		else if (x < t->value)
+		else if (x < t->key)
 			t->Left = remove(x, t->Left);
-		else if (x > t->value)
+		else if (x > t->key)
 			t->Right = remove(x, t->Right);
 		else if (t->Left && t->Right)
 		{
 			temp = findMin(t->Right);
-			t->value = temp->value;
-			t->Right = remove(t->value, t->Right);
+			t->key = temp->key;
+			t->Right = remove(t->key, t->Right);
 		}
 		else
 		{
@@ -83,9 +88,9 @@ class BST
 	{
 		if (t == NULL)
 			return NULL;
-		else if (x < t->value)
+		else if (x < t->key)
 			return find(t->Left, x);
-		else if (x > t->value)
+		else if (x > t->key)
 			return find(t->Right, x);
 		else
 			return t;
@@ -95,14 +100,14 @@ class BST
 		if (t == NULL)
 			return;
 		inorder(t->Left);
-		std::cout << t->value << " ";
+		std::cout << "Key: " << t->key << " " << "Val: " << t->value << " ";
 		inorder(t->Right);
 	}
 public:
 	BST();
 	~BST();
 
-	void insert(int x);
+	void insert(int x, int v);
 	void remove(int x);
 	void search(int x);
 

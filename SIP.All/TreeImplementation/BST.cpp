@@ -11,9 +11,9 @@ BST::~BST()
 	root = freeSpace(root);
 }
 
-void BST::insert(int x)
+void BST::insert(int x, int v)
 {
-	root = insert(x, root);
+	root = insert(x, v, root);
 }
 
 void BST::remove(int x)
