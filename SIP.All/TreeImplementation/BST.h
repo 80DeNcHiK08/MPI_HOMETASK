@@ -3,6 +3,7 @@
 
 class BST
 {
+private:
 	struct Node {
 		Node* Left;
 		Node* Right;
@@ -10,6 +11,7 @@ class BST
 		int value;
 	};
 	Node* root;
+
 
 	Node *newNode(int x, int v)
 	{
@@ -107,6 +109,22 @@ class BST
 	void iterate_in(Node *n);
 	void iterate_pre(Node *n);
 	void iterate_post(Node *n);
+
+	int height(Node* node)
+	{
+		if (node == NULL)
+			return 0;
+		else
+		{
+			int lheight = height(node->Left);
+			int rheight = height(node->Right);
+
+			if (lheight > rheight)
+				return(lheight + 1);
+			else
+				return(rheight + 1);
+		}
+	}
 public:
 	BST();
 	~BST();
