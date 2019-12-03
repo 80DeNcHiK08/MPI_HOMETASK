@@ -95,6 +95,17 @@ typename Tree<T>::TreeNode* Tree<T>::searchByKey(TreeNode* t, int key)
 	}
 }
 
+template<class T>
+typename Tree<T>::TreeNode* findMax(TreeNode* t)
+{
+	if (t == NULL)
+		return NULL;
+	else if (t->Right == NULL)
+		return t;
+	else
+		return findMax(t->Right);
+}
+
 //searchDeep
 template<class T>
 typename Tree<T>::TreeNode* Tree<T>::searchDeep(TreeNode* t, T value)
@@ -137,7 +148,6 @@ typename Tree<T>::TreeNode* Tree<T>::searchWide(TreeNode* t, T value)
 	}
 	return NULL;
 }
-//remove
 
 template<typename T>
 void Tree<T>::Add(int key, T value)
@@ -148,13 +158,27 @@ void Tree<T>::Add(int key, T value)
 template<class T>
 bool Tree<T>::Remove(int key)
 {
-	return true;
+	TreeNode* tmp;
+	searchByKey()
 }
 
 template<class T>
-typename Tree<T>::TreeNode* Tree<T>::Find(int key)
+bool Tree<T>::Remove(T value, bool searchType)
 {
-	return searchByKey(this.root, key);
+	if (searchtype)
+	{
+
+	}
+	else
+	{
+
+	}
+}
+
+template<class T>
+T Tree<T>::Find(int key)
+{
+	return searchByKey(this.root, key)->value;
 }
 
 template<class T>

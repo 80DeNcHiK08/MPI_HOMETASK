@@ -25,13 +25,14 @@ private:
 	TreeNode* deleteTree(TreeNode* t);
 	TreeNode* newNode(int key, T value);
 	TreeNode* insert(int key, T value, TreeNode* node); //Insert by key
-	TreeNode* remove(TreeNode* node); //Remove node, use methods below to get Node to delete
+	TreeNode* remove(int key, TreeNode* t);
 
 	TreeNode* searchByKey(TreeNode* t, int key); //Deep search by key
 	TreeNode* searchDeep(TreeNode* t, T value); //Deep search by value
 	TreeNode* searchWide(TreeNode* t, T value); //Wide search by value
 
 	int height(TreeNode* node);
+	TreeNode* findMax(TreeNode* t);
 public:
 	Tree();
 	~Tree();
@@ -41,7 +42,7 @@ public:
 	bool Remove(T value, bool searchtype);
 	bool Remove(int key);
 
-	TreeNode* Find(int key);
+	T Find(int key);
 	bool Find(T value, bool searchtype);
 
 	//int Count = Count.get();
