@@ -12,7 +12,7 @@ private:
 	};
 	QueueNode *head;
 public:
-	Queue();
+	Queue()
 	{
 		head = NULL;
 	}

@@ -106,9 +106,10 @@ void Tree<T>::Add(int key, T value)
 }
 
 template<class T>
-void Tree<T>::Remove(TreeNode* t)
+bool Tree<T>::TryRemove(int key)
 {
-	this.root = remove(t)
+	return true;
+	//this.root = remove(t)
 }
 
 template<class T>

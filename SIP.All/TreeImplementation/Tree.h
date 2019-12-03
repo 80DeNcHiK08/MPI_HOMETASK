@@ -41,10 +41,12 @@ public:
 	~Tree();
 
 	void Add(int key, T value);
-	void Remove(TreeNode* node);
+	void Add(T value);
+	bool TryRemove(T value);
+	bool TryRemove(int key);
 
 	TreeNode* Find(int key);
-	//static T Find(T value, bool searchtype);
+	static T Find(T value, bool searchtype);
 
 	int Count = Count.get();
 };
