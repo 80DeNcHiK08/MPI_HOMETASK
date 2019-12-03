@@ -1,37 +1,53 @@
 #pragma once
-#include <iostream>
-#include "Group.h"
-#include "Student.h"
+#include "Queue.h"
 
-template <class T>
+template<class T>
 class Tree
 {
 private:
-	struct Node
-	{
-		int Key;
-		T Value;
-		struct Node *Left, *Right;
-		Node(int key)
-		{
-			this->Key = key;
-			Left = Right = Value = NULL;
-		}
+	struct TreeNode {
+		TreeNode* left;
+		TreeNode* right;
+		int key;
+		T value;
 	};
 
-	Node *Root;
-	void FreeMemory(Node*);
-	int treeSize;
+	static class Count
+	{
+	protected:
+		int value;
+		void set(int val) { value = val; }
+	public:
+		int get() { return value; }
+	};
+
+	TreeNode* root;
+	TreeNode* deleteTree(TreeNode* t);
+	TreeNode* newNode(int key, T value);
+	TreeNode* insert(int key, T value, TreeNode* node); //Insert by key
+	TreeNode* remove(TreeNode* node); //Remove node, use methods below to get Node to delete
+
+	TreeNode* searchDeep(TreeNode* t, int key); //Deep search by key
+	TreeNode* searchDeep(TreeNode* t, T value); //Deep search by value
+	TreeNode* searchWide(TreeNode* t, int key); //Wide search by key
+	TreeNode* searchWide(TreeNode* t, T value); //Wide search by value
+
+	int height(TreeNode* node);
+	//Iterators
+	void iterate_in(TreeNode *n);
+	void iterate_pre(TreeNode *n);
+	void iterate_post(TreeNode *n);
 public:
 	Tree();
 	~Tree();
 
-	Node* Insert(T, Node*);
-	Node* Remove(bool, T, Node*);
+	void Add(int key, T value);
+	void Remove(int key, bool searchtype);
+	void Remove(T value, bool searchtype);
 
-	void Find(bool ,T, Node*, bool);
+	TreeNode* Find(int key, bool searchtype);
+	TreeNode* Find(T value, bool searchtype);
 
-	void print();
-	int size();
+	int Count = Count.get();
 };
 
