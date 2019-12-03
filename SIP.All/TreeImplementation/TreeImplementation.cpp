@@ -1,14 +1,16 @@
 #include "pch.h"
 #include "BST.h"
 #include "Tree.h"
-class M
-{
-
-};
 
 int main()
 {
-	Tree<M> t;
+	Tree<int> t;
+	t.Add(1, 3);
+	t.Add(3, 4);
+	t.Add(5, 3);
+	if (t.Find(4))
+	{
+		std::cout << "yes";
+	}
 	return 0;
-	int key = 0;
 }
