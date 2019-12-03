@@ -4,5 +4,6 @@
 
 int main()
 {
+	Tree<int> t;
 	return 0;
 }

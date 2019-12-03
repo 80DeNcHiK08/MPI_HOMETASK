@@ -27,9 +27,8 @@ private:
 	TreeNode* insert(int key, T value, TreeNode* node); //Insert by key
 	TreeNode* remove(TreeNode* node); //Remove node, use methods below to get Node to delete
 
-	TreeNode* searchDeep(TreeNode* t, int key); //Deep search by key
+	TreeNode* searchByKey(TreeNode* t, int key); //Deep search by key
 	TreeNode* searchDeep(TreeNode* t, T value); //Deep search by value
-	TreeNode* searchWide(TreeNode* t, int key); //Wide search by key
 	TreeNode* searchWide(TreeNode* t, T value); //Wide search by value
 
 	int height(TreeNode* node);
@@ -42,11 +41,10 @@ public:
 	~Tree();
 
 	void Add(int key, T value);
-	void Remove(int key, bool searchtype);
-	void Remove(T value, bool searchtype);
+	void Remove(TreeNode* node);
 
-	TreeNode* Find(int key, bool searchtype);
-	TreeNode* Find(T value, bool searchtype);
+	TreeNode* Find(int key);
+	//static T Find(T value, bool searchtype);
 
 	int Count = Count.get();
 };

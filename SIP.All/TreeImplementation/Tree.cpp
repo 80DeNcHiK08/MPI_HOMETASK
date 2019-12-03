@@ -75,7 +75,7 @@ int Tree<T>::height(TreeNode* node)
 }
 
 template<typename T>
-Tree<T>::TreeNode* Tree<T>::searchDeep(TreeNode* t, int key)
+Tree<T>::TreeNode* Tree<T>::searchByKey(TreeNode* t, int key)
 {
 	if (t == NULL)
 	{
@@ -95,73 +95,24 @@ Tree<T>::TreeNode* Tree<T>::searchDeep(TreeNode* t, int key)
 	}
 }
 
-//searchDeepByval
-//searchWide
+//searchDeep
 //searchWide
 //remove
 
 template<typename T>
 void Tree<T>::Add(int key, T value)
 {
-	root = Tree<T>::insert(key, value);
+	this.root = Tree<T>::insert(key, value);
 }
 
 template<class T>
-void Tree<T>::Remove(T value, bool searchOptions)
+void Tree<T>::Remove(TreeNode* t)
 {
-	if (searchOptions)
-	{
-		root = Tree<T>::searchDeep(value);
-		root = Tree<T>::remove(root);
-	}
-	else
-	{
-		root = Tree<T>::searchWide(value);
-		root = Tree<T>::remove(root);
-	}
+	this.root = remove(t)
 }
 
 template<class T>
-void Tree<T>::Remove(int key, bool searchOptions)
+Tree<T>::TreeNode* Tree<T>::Find(int key)
 {
-	if (searchOptions)
-	{
-		root = Tree<T>::searchDeep(key);
-		root = Tree<T>::remove(root);
-	}
-	else
-	{
-		root = Tree<T>::searchWide(key);
-		root = Tree<T>::remove(root);
-	}
-}
-
-template<class T>
-Tree<T>::TreeNode* Tree<T>::Find(T value, bool searchOptions)
-{
-	if (searchOptions)
-	{
-		root = Tree<T>::searchDeep(value);
-		return root;
-	}
-	else
-	{
-		root = Tree<T>::searchWide(value);
-		return root;
-	}
-}
-
-template<class T>
-Tree<T>::TreeNode* Tree<T>::Find(int key, bool searchOptions)
-{
-	if (searchOptions)
-	{
-		root = Tree<T>::searchDeep(value);
-		return root;
-	}
-	else
-	{
-		root = Tree<T>::searchWide(value);
-		return root;
-	}
+	return searchByKey(this.root, key);
 }
