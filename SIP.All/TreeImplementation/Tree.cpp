@@ -24,32 +24,13 @@ typename Tree<T>::TreeNode *Tree<T>::newNode(int key, T value)
 }
 
 template<class T>
-typename Tree<T>::TreeNode* Tree<T>::insert(int key, T value, TreeNode* node)
-{
-	if (node == NULL) 
-	{
-		return newNode(key, value);
-	}
-
-	if (key < node->key)
-	{
-		node->left = insert(key, value, node->left);
-	}
-	else if (key > node->key)
-	{
-		node->right = insert(key, value, node->right);
-	}
-	return node;
-}
-
-template<class T>
 typename Tree<T>::TreeNode* Tree<T>::deleteTree(TreeNode* t)
 {
 	if (t == NULL)
 		return NULL;
 	{
-		freeSpace(t->left);
-		freeSpace(t->right);
+		deleteTree(t->left);
+		deleteTree(t->right);
 		delete t;
 	}
 	return NULL;
@@ -96,7 +77,7 @@ typename Tree<T>::TreeNode* Tree<T>::searchByKey(TreeNode* t, int key)
 }
 
 template<class T>
-typename Tree<T>::TreeNode* findMax(TreeNode* t)
+typename Tree<T>::TreeNode* Tree<T>::findMax(TreeNode* t)
 {
 	if (t == NULL)
 		return NULL;
@@ -125,7 +106,7 @@ typename Tree<T>::TreeNode* Tree<T>::searchDeep(TreeNode* t, T value)
 template<class T>
 typename Tree<T>::TreeNode* Tree<T>::searchWide(TreeNode* t, T value)
 {
-	Queue storage;
+	Queue<TreeNode> storage;
 	storage.addtoQueue(t);
 
 	TreeNode *tmp;
@@ -150,22 +131,62 @@ typename Tree<T>::TreeNode* Tree<T>::searchWide(TreeNode* t, T value)
 }
 
 template<typename T>
+typename Tree<T>::TreeNode* Tree<T>::insert(int key, T value, TreeNode* node)
+{
+	TreeNode* newnode = newNode(key, value);
+	TreeNode* x = root;
+	TreeNode* y = NULL;
+	while (x != NULL)
+	{
+		y = x;
+		if (key < x->key)
+		{
+			x = x->left;
+		}
+		else
+		{
+			x = x->right;
+		}
+	}
+	if (y == NULL)
+	{
+		y = newnode;
+	}
+	else if (key < y->key)
+	{
+		y->left = newnode;
+	}
+	else
+	{
+		y->right = newnode;
+	}
+	return y;
+}
+
+template<typename T>
 void Tree<T>::Add(int key, T value)
 {
-	root = Tree<T>::insert(key, value);
+	if (root == NULL)
+	{
+		root = insert(key, value, root);
+	} 
+	else
+	{
+		insert(key, value, root);
+	}
 }
 
 template<class T>
 bool Tree<T>::Remove(int key)
 {
 	TreeNode* tmp;
-	searchByKey()
+	searchByKey();
 }
 
 template<class T>
 bool Tree<T>::Remove(T value, bool searchType)
 {
-	if (searchtype)
+	if (searchType)
 	{
 
 	}
@@ -176,9 +197,17 @@ bool Tree<T>::Remove(T value, bool searchType)
 }
 
 template<class T>
-T Tree<T>::Find(int key)
+bool Tree<T>::Find(int key, T& value)
 {
-	return searchByKey(this.root, key)->value;
+	if (searchByKey(root, key) != NULL)
+	{
+		value = searchByKey(root, key)->value;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 template<class T>

@@ -24,8 +24,8 @@ private:
 	TreeNode* root;
 	TreeNode* deleteTree(TreeNode* t);
 	TreeNode* newNode(int key, T value);
-	TreeNode* insert(int key, T value, TreeNode* node); //Insert by key
 	TreeNode* remove(int key, TreeNode* t);
+	TreeNode* insert(int key, T value, TreeNode* node);
 
 	TreeNode* searchByKey(TreeNode* t, int key); //Deep search by key
 	TreeNode* searchDeep(TreeNode* t, T value); //Deep search by value
@@ -42,7 +42,7 @@ public:
 	bool Remove(T value, bool searchtype);
 	bool Remove(int key);
 
-	T Find(int key);
+	bool Find(int key, T& value);
 	bool Find(T value, bool searchtype);
 
 	//int Count = Count.get();
