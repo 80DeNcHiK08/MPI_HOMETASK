@@ -1,20 +1,20 @@
 #include "pch.h"
 #include "Tree.h"
 
-template<class T>
-Tree<T>::Tree()
+template<class T, typename Tk>
+Tree<T, Tk>::Tree()
 {
 	root = NULL;
 }
 
-template<class T>
-Tree<T>::~Tree()
+template<class T, typename Tk>
+Tree<T, Tk>::~Tree()
 {
 	root = deleteTree(root);
 }
 
-template<class T>
-typename Tree<T>::TreeNode *Tree<T>::newNode(int key, T value)
+template<class T, typename Tk>
+typename Tree<T, Tk>::TreeNode *Tree<T, Tk>::newNode(Tk key, T value)
 {
 	TreeNode *temp = new TreeNode;
 	temp->key = key;
@@ -23,8 +23,8 @@ typename Tree<T>::TreeNode *Tree<T>::newNode(int key, T value)
 	return temp;
 }
 
-template<class T>
-typename Tree<T>::TreeNode* Tree<T>::deleteTree(TreeNode* t)
+template<class T, typename Tk>
+typename Tree<T, Tk>::TreeNode* Tree<T, Tk>::deleteTree(TreeNode* t)
 {
 	if (t == NULL)
 		return NULL;
@@ -36,27 +36,8 @@ typename Tree<T>::TreeNode* Tree<T>::deleteTree(TreeNode* t)
 	return NULL;
 }
 
-template<class T>
-int Tree<T>::height(TreeNode* node)
-{
-	if (node == NULL)
-	{
-		return 0;
-	}
-	else
-	{
-		int lheight = height(node->left);
-		int rheight = height(node->right);
-
-		if (lheight > rheight)
-			return(lheight + 1);
-		else
-			return(rheight + 1);
-	}
-}
-
-template<typename T>
-typename Tree<T>::TreeNode* Tree<T>::searchByKey(TreeNode* t, int key)
+template<class T, typename Tk>
+typename Tree<T, Tk>::TreeNode* Tree<T, Tk>::searchByKey(TreeNode* t, int key)
 {
 	if (t == NULL)
 	{
@@ -76,20 +57,8 @@ typename Tree<T>::TreeNode* Tree<T>::searchByKey(TreeNode* t, int key)
 	}
 }
 
-template<class T>
-typename Tree<T>::TreeNode* Tree<T>::findMax(TreeNode* t)
-{
-	if (t == NULL)
-		return NULL;
-	else if (t->Right == NULL)
-		return t;
-	else
-		return findMax(t->Right);
-}
-
-//searchDeep
-template<class T>
-typename Tree<T>::TreeNode* Tree<T>::searchDeep(TreeNode* t, T value)
+template<class T, typename Tk>
+typename Tree<T, Tk>::TreeNode* Tree<T, Tk>::searchDeep(TreeNode* t, T value)
 {
 	if (t == NULL)
 	{
@@ -103,8 +72,8 @@ typename Tree<T>::TreeNode* Tree<T>::searchDeep(TreeNode* t, T value)
 	searchDeep(t->right, value);
 }
 
-template<class T>
-typename Tree<T>::TreeNode* Tree<T>::searchWide(TreeNode* t, T value)
+template<class T, typename Tk>
+typename Tree<T, Tk>::TreeNode* Tree<T, Tk>::searchWide(TreeNode* t, T value)
 {
 	Queue<TreeNode> storage;
 	storage.addtoQueue(t);
@@ -130,8 +99,8 @@ typename Tree<T>::TreeNode* Tree<T>::searchWide(TreeNode* t, T value)
 	return NULL;
 }
 
-template<typename T>
-typename Tree<T>::TreeNode* Tree<T>::insert(int key, T value, TreeNode* node)
+template<class T, typename Tk>
+typename Tree<T, Tk>::TreeNode* Tree<T, Tk>::insert(Tk key, T value, TreeNode* node)
 {
 	TreeNode* newnode = newNode(key, value);
 	TreeNode* x = root;
@@ -163,8 +132,8 @@ typename Tree<T>::TreeNode* Tree<T>::insert(int key, T value, TreeNode* node)
 	return y;
 }
 
-template<typename T>
-void Tree<T>::Add(int key, T value)
+template<class T, typename Tk>
+void Tree<T, Tk>::Add(Tk key, T value)
 {
 	if (root == NULL)
 	{
@@ -176,15 +145,15 @@ void Tree<T>::Add(int key, T value)
 	}
 }
 
-template<class T>
-bool Tree<T>::Remove(int key)
+template<class T, typename Tk>
+bool Tree<T, Tk>::Remove(Tk key)
 {
 	TreeNode* tmp;
 	searchByKey();
 }
 
-template<class T>
-bool Tree<T>::Remove(T value, bool searchType)
+template<class T, typename Tk>
+bool Tree<T, Tk>::Remove(T value, bool searchType)
 {
 	if (searchType)
 	{
@@ -196,8 +165,8 @@ bool Tree<T>::Remove(T value, bool searchType)
 	}
 }
 
-template<class T>
-bool Tree<T>::Find(int key, T& value)
+template<class T, typename Tk>
+bool Tree<T, Tk>::Find(Tk key, T& value)
 {
 	if (searchByKey(root, key) != NULL)
 	{
@@ -210,8 +179,8 @@ bool Tree<T>::Find(int key, T& value)
 	}
 }
 
-template<class T>
-bool Tree<T>::Find(T value, bool searchtype)
+template<class T, typename Tk>
+bool Tree<T, Tk>::Find(T value, bool searchtype)
 {
 	if (searchtype)
 	{
