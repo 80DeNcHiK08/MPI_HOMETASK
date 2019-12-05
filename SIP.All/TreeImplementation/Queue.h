@@ -17,7 +17,7 @@ public:
 		head = NULL;
 	}
 
-	bool IsEmty()
+	bool IsEmtpy()
 	{
 		if (head == NULL)
 		{
