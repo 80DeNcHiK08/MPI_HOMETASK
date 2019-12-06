@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Tree.h"
 
-template<class T, typename Tk>
+/*template<class T, typename Tk>
 Tree<T, Tk>::Tree()
 {
 	root = NULL;
@@ -204,4 +204,81 @@ bool Tree<T, Tk>::Find(T value, bool searchtype)
 			return false;
 		}
 	}
+}*/
+
+template<class T, typename Tk>
+Tree<T, Tk>::Tree()
+{
+	root = NULL;
+}
+
+template<class T, typename Tk>
+Tree<T, Tk>::~Tree()
+{
+	root = deleteTree(root);
+}
+
+template<class T, typename Tk>
+typename Tree<T, Tk>::TreeNode* Tree<T, Tk>::deleteTree(TreeNode* node)
+{
+	if (node == NULL)
+		return NULL;
+	{
+		deleteTree(node->left);
+		deleteTree(node->right);
+		delete node;
+	}
+	return NULL;
+}
+
+template<class T, typename Tk>
+typename Tree<T, Tk>::TreeNode *Tree<T, Tk>::newNode(Tk key, T value, int level)
+{
+	TreeNode *temp = new TreeNode;
+	temp->key = key;
+	temp->value = value;
+	temp->level = level;
+	temp->left = temp->right = temp->l_prev = temp->l_next = NULL;
+	return temp;
+}
+
+template<class T, typename Tk>
+typename Tree<T, Tk>::TreeNode* Tree<T, Tk>::insert(Tk key, T value)
+{
+	TreeNode* current = root;
+	TreeNode* child = NULL;
+	int counter = 0;
+	while (current != NULL)
+	{
+		child = current;
+		current = ((key < current->key) ? current->left : current->right);
+		counter++;
+	}
+	TreeNode* newnode = newNode(key, value, counter);
+	if (child == NULL)
+	{
+		child = newnode;
+		leftmosts.AddToEnd(child->key);
+	}
+	else if (key < child->key)
+	{
+		child->left = newnode;
+		(!leftmosts.IfNodeByIndexExists(counter)) ? 
+			leftmosts.AddToEnd(newnode->key) : leftmosts.Replace(leftmosts.GetValue(counter), newnode->key);
+	}
+	else
+	{
+		child->right = newnode;
+		if (!leftmosts.IfNodeByIndexExists(counter))
+		{
+			leftmosts.AddToEnd(newnode->key);
+		}
+	}
+	return child;
+}
+
+template<class T, typename Tk>
+void Tree<T, Tk>::Add(Tk key, T value)
+{
+	(root == NULL) ? root = insert(key, value) : insert(key, value);
 }

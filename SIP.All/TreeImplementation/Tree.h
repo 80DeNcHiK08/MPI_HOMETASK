@@ -1,33 +1,25 @@
 #pragma once
-#include <vector>
-#include "Queue.h"
+#include <iostream>
+#include "List.h"
 
 template<class T, typename Tk>
 class Tree
 {
 private:
 	struct TreeNode {
-		TreeNode* left, right, l_next, l_prev;
+		TreeNode *left, *right, *l_next, *l_prev;
+		int level;
 		Tk key;
 		T value;
 	};
 
-	std::vector<T> lvl_first;
-
-	/*static class Count
-	{
-	protected:
-		int value;
-		void set(int val) { value = val; }
-	public:
-		int get() { return value; }
-	};*/
-
+	List<T, Tk> leftmosts;
 	TreeNode* root;
+
 	TreeNode* deleteTree(TreeNode* t);
-	TreeNode* newNode(Tk key, T value);
+	TreeNode* newNode(Tk key, T value, int level);
 	TreeNode* remove(Tk key, TreeNode* t);
-	TreeNode* insert(Tk key, T value, TreeNode* node);
+	TreeNode* insert(Tk key, T value);
 
 	TreeNode* searchByKey(TreeNode* t, int key); //Deep search by key
 	TreeNode* searchDeep(TreeNode* t, T value); //Deep search by value
