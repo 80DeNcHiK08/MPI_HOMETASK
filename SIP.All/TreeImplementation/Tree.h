@@ -1,29 +1,23 @@
 #pragma once
-#include <iostream>
+#include "TreeNode.h"
 #include "List.h"
 
-template<class T, typename Tk>
+template<typename Tk, class T>
 class Tree
 {
 private:
-	struct TreeNode {
-		TreeNode *left, *right, *l_next, *l_prev;
-		int level;
-		Tk key;
-		T value;
-	};
-
 	List<T, Tk> leftmosts;
-	TreeNode* root;
+	TreeNode<Tk, T>* root;
 
-	TreeNode* deleteTree(TreeNode* t);
-	TreeNode* newNode(Tk key, T value, int level);
-	TreeNode* remove(Tk key, TreeNode* t);
-	TreeNode* insert(Tk key, T value);
+	TreeNode<Tk, T>* deleteTree(TreeNode<Tk, T>* t);
+	TreeNode<Tk, T>* newNode(Tk key, T value, int level);
+	TreeNode<Tk, T>* remove(Tk key, TreeNode<Tk, T>* t);
+	TreeNode<Tk, T>* insert(Tk key, T value);
+	TreeNode<Tk, T>* assignLevelNodes(TreeNode<Tk, T>* node, int level);
 
-	TreeNode* searchByKey(TreeNode* t, int key); //Deep search by key
-	TreeNode* searchDeep(TreeNode* t, T value); //Deep search by value
-	TreeNode* searchWide(TreeNode* t, T value); //Wide search by value
+	TreeNode<Tk, T>* searchByKey(TreeNode<Tk, T>* t, int key); //Deep search by key
+	TreeNode<Tk, T>* searchDeep(TreeNode<Tk, T>* t, T value); //Deep search by value
+	TreeNode<Tk, T>* searchWide(TreeNode<Tk, T>* t, T value); //Wide search by value
 
 	//int height(TreeNode* node);
 public:

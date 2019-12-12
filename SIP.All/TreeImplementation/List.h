@@ -1,18 +1,19 @@
 #pragma once
+#include "TreeNode.h"
 #include "Tree.h"
 
-template<class T, typename Tk>
+template<typename Tk, class T>
 class List
 {
 private:
 	struct ListNode
 	{
-		Tree<T, Tk>::TreeNode* data;
+		TreeNode<Tk, T>* data;
 		ListNode *next;
 	};
 	ListNode* head, *tail;
 
-	void createNode(TreeNode* tnode)
+	void createNode(TreeNode<Tk, T>* tnode)
 	{
 		ListNode* temp = new ListNode;
 		temp->data = tnode;
@@ -29,7 +30,7 @@ private:
 		}
 		Count++;
 	}
-	void replace(Tree<T, Tk>::TreeNode* oldnode, Tree<T, Tk>::TreeNode* newnode)
+	void replace(TreeNode<Tk, T>* oldnode, TreeNode<Tk, T>* newnode)
 	{
 		ListNode *current = head;
 		while(current != NULL)
@@ -41,7 +42,7 @@ private:
 			current = current->next;
 		}
 	}
-	bool getIndex(Tree<T, Tk>::TreeNode* value, int &index)
+	bool getIndex(TreeNode<Tk, T>* value, int &index)
 	{
 		ListNode *current = head;
 		int result = 0;
@@ -57,7 +58,7 @@ private:
 		}
 		return false;
 	}
-	bool getValue(int index, Tree<T, Tk>::TreeNode &node)
+	bool getValue(int index, TreeNode<Tk, T>*&node)
 	{
 		ListNode *current = head;
 		int counter = 0;
@@ -84,27 +85,27 @@ public:
 	{
 
 	}
-	void AddToEnd(Tree<T, Tk>::TreeNode* tnode)
+	void AddToEnd(TreeNode<Tk, T>* tnode)
 	{
 		createNode(tnode);
 	}
-	void Replace(Tree<T, Tk>::TreeNode* oldnode, Tree<T, Tk>::TreeNode* newnode)
+	void Replace(TreeNode<Tk, T>* oldnode, TreeNode<Tk, T>* newnode)
 	{
 		replace(oldnode, newnode);
 	}
-	int GetIndex(Tree<T, Tk>::TreeNode* node)
+	int GetIndex(TreeNode<Tk, T>* node)
 	{
 		int result;
 		return (getIndex(node, result) ? result :  NULL);
 	}
 	bool IfNodeByIndexExists(int index)
 	{
-		Tree<T, Tk>::TreeNode* tmp;
+		TreeNode<Tk, T>* tmp;
 		return getValue(index, tmp);
 	}
-	TreeNode* GetValue(int index)
+	TreeNode<Tk, T>* GetValue(int index)
 	{
-		Tree<T, Tk>::TreeNode* result;
+		TreeNode<Tk, T>* result;
 		return (getValue(index, result) ? result : NULL);
 	}
 };
