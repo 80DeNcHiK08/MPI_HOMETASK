@@ -11,15 +11,14 @@ private:
 
 	TreeNode<Tk, T>* deleteTree(TreeNode<Tk, T>* t);
 	TreeNode<Tk, T>* newNode(Tk key, T value, int level);
+	TreeNode<Tk, T>* newNode(T value, int level);
 	TreeNode<Tk, T>* remove(Tk key, TreeNode<Tk, T>* t);
 	TreeNode<Tk, T>* insert(Tk key, T value);
-	TreeNode<Tk, T>* assignLevelNodes(TreeNode<Tk, T>* node, int level);
+	TreeNode<Tk, T>* insert(T value);
 
 	TreeNode<Tk, T>* searchByKey(TreeNode<Tk, T>* t, int key); //Deep search by key
 	TreeNode<Tk, T>* searchDeep(TreeNode<Tk, T>* t, T value); //Deep search by value
 	TreeNode<Tk, T>* searchWide(TreeNode<Tk, T>* t, T value); //Wide search by value
-
-	//int height(TreeNode* node);
 public:
 	Tree();
 	~Tree();
@@ -33,4 +32,5 @@ public:
 	bool Find(T value, bool searchtype);
 
 	//int Count = Count.get();
+	int Count = 0;
 };

@@ -244,6 +244,38 @@ typename TreeNode<Tk, T>* Tree<Tk, T>::newNode(Tk key, T value, int level)
 }
 
 template<typename Tk, class T>
+typename TreeNode<Tk, T>* Tree<Tk, T>::newNode(T value, int level)
+{
+	TreeNode<Tk, T>* temp = new TreeNode<Tk, T>;
+	temp->value = value;
+	temp->level = level;
+	temp->left = temp->right = temp->l_prev = temp->l_next = NULL;
+	return temp;
+}
+
+template<typename Tk, class T>
+typename TreeNode<Tk, T>* Tree<Tk, T>::insert(T value)
+{
+	TreeNode<Tk, T>* current = root;
+	TreeNode<Tk, T>* next = NULL;
+	int counter = 0;
+	while (current != NULL)
+	{
+		next = current;
+		current = ((key < current->key) ? current->left : current->right);
+		counter++;
+		height = counter;
+	}
+	TreeNode<Tk, T>* newnode = newNode(value, counter);
+	if (next = NULL)
+	{
+		newnode->key = floor(Count/2) + 1;
+		next = newnode;
+		leftmosts.AddToEnd(next);
+	}
+}
+
+template<typename Tk, class T>
 typename TreeNode<Tk, T>* Tree<Tk, T>::insert(Tk key, T value)
 {
 	TreeNode<Tk, T>* current = root;
@@ -276,22 +308,6 @@ typename TreeNode<Tk, T>* Tree<Tk, T>::insert(Tk key, T value)
 		}
 	}
 	return child;
-}
-
-template<typename Tk, class T>
-typename TreeNode<Tk, T>* Tree<Tk, T>::assignLevelNodes(TreeNode<Tk, T>* node, int level)
-{
-	if (node == NULL)
-		return;
-	else
-	{
-		assignLevelNodes(node->left, level - 1);
-		{
-			if (level == 0)
-				return node;
-			assignLevelNodes(node->right, level - 1);
-		}
-	}
 }
 
 template<typename Tk, class T>
