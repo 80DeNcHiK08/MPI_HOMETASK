@@ -1,5 +1,5 @@
 #pragma once
-#include "TreeNode.h"
+#include "ListNode.h"
 #include "Tree.h"
 
 template<typename K, class V>
@@ -8,10 +8,10 @@ class List
 private:
 	struct ListNode
 	{
-		TreeNode<K, V>* Data;
-		ListNode* Next;
+		TreeNode<K, V> *Data;
+		ListNode *Next;
 	};
-	ListNode* head, * tail;
+	ListNode *head, *tail;
 
 	void createNode(TreeNode<K, V>* tnode)
 	{
@@ -29,6 +29,16 @@ private:
 			tail = temp;
 		}
 		Count++;
+	}
+	void clearlist()
+	{
+		ListNode* temp = this->head;
+		while (temp != NULL)
+		{
+			ListNode* Next = temp->Next;
+			delete temp;
+			temp = Next;
+		}
 	}
 	void replace(TreeNode<K, V>* oldnode, TreeNode<K, V>* newnode)
 	{
@@ -103,9 +113,18 @@ public:
 		TreeNode<K, V>* tmp;
 		return getValue(index, tmp);
 	}
+	bool IfNodeByValueExists(TreeNode<K, V>* node)
+	{
+		int tmp;
+		return getIndex(node, tmp);
+	}
 	TreeNode<K, V>* GetValue(int index)
 	{
 		TreeNode<K, V>* result;
 		return (getValue(index, result) ? result : NULL);
+	}
+	void Clear()
+	{
+		clearlist();
 	}
 };

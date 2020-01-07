@@ -157,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="List.h" />
+    <ClInclude Include="ListNode.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="TreeNode.h" />
