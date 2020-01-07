@@ -197,12 +197,6 @@ typename TreeNode<K, V>* Tree<K, V>::balance_tree(TreeNode<K, V>* current)
 			RotateRL(current) : RotateRR(current);
 	}
 	TreeNode<K, V>* temp = current;
-	this->LeftMosts.Clear();
-	while (temp != NULL)
-	{
-		LeftMosts.AddToEnd(temp);
-		temp = temp->Left;
-	}
 
 	return current;
 }

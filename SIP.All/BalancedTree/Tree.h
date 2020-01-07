@@ -2,7 +2,12 @@
 #include "TreeNode.h"
 #include "List.h"
 
-template<typename K, class V>
+template<typename T>
+constexpr bool checkType =
+std::is_same<T, short>::value || std::is_same<T, long>::value || std::is_same<T, int>::value;
+
+
+template<class K, class V>
 class Tree
 {
 private:
@@ -32,6 +37,8 @@ private:
 	TreeNode<K, V>* searchDeep(TreeNode<K, V>* t, V value);
 	TreeNode<K, V>* searchWide(TreeNode<K, V>* t, V value);
 public:
+	static_assert(checkType<K>, "Incorrect argument type (must be: int, long, short)");
+
 	Tree();
 	~Tree();
 
