@@ -7,7 +7,7 @@ constexpr bool checkType =
 std::is_same<T, short>::value || std::is_same<T, long>::value || std::is_same<T, int>::value;
 
 
-template<class K, class V>
+template<typename K, class V>
 class Tree
 {
 private:
