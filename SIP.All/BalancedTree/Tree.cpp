@@ -9,9 +9,33 @@ Tree<K, V>::Tree()
 }
 
 template<typename K, class V>
+Tree<K, V>::Tree(const Tree<K, V>& othTree)
+{
+	*this = othTree;
+}
+
+template<typename K, class V>
 Tree<K, V>::~Tree()
 {
 	Root = deleteTree(Root);
+}
+
+template<typename K, class V>
+typename Tree<K, V>& Tree<K, V>::operator= (const Tree<K, V>& obj) {
+	if (this == &obj)
+		return *this;
+	this->LeftMosts = obj->LeftMosts;
+
+	for (int i = 0; i < LeftMosts.Count; i++)
+	{
+		TreeNode<K, V>* current = LeftMosts.GetValue(i);
+		while (current != NULL)
+		{
+			
+			current = current->Next;
+		}
+	}
+	return *this;
 }
 
 template<typename K, class V>
@@ -98,9 +122,9 @@ void Tree<K, V>::fillLeftMosts()
 	TreeNode<K, V>* current = Root;
 	while (current != NULL)
 	{
-		/*(current->Left == NULL && current->Right != NULL) ?
+		(current->Left == NULL && current->Right != NULL) ?
 			LeftMosts.AddToEnd(current->Right) :
-			LeftMosts.AddToEnd(current);*/
+			LeftMosts.AddToEnd(current);
 		current = current->Left;
 	}
 }

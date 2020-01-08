@@ -9,8 +9,8 @@ protected:
 	string* FacultyName;
 	int compareFaculty(Faculty, Faculty);
 public:
-	Faculty() :Tree<int, Group>() { FacultyName = new string("FacultyName"); }
-	Faculty(const Faculty& othMas) :Tree<int, Group>(othMas) { *this = othMas; }
+	Faculty() : Tree<int, Group>() { FacultyName = new string("FacultyName"); }
+	//Faculty(const Faculty& othMas) : Tree<int, Group>(othMas) { *this = othMas; }
 	~Faculty() { delete FacultyName; }
 	void PrintAllInfo();
 	Faculty& operator= (const Faculty&);

@@ -1,5 +1,4 @@
 #include "Student.h"
-#include <string>
 
 using namespace std;
 
@@ -151,5 +150,5 @@ bool Student::operator>(Student& obj)
 
 void Student::PrintAllInfo()
 {
-	cout << "Student: ";
+	cout << "Student: " << this;
 }

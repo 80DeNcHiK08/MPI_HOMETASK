@@ -44,7 +44,10 @@ private:
 	TreeNode<K, V>* RotateRL(TreeNode<K, V>* parent);
 public:
 	Tree();
+	Tree(const Tree& othTree);
 	~Tree();
+
+	Tree<K, V>& operator=(const Tree<K, V>& obj);
 
 	static_assert(checkType<K>, "Incorrect argument type (must be: int, long, short)");
 

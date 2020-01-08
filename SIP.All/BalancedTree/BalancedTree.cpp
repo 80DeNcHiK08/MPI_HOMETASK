@@ -56,7 +56,7 @@ int main()
 
 	tree.LevelOrderPrint();*/
 
-	Group KS = Group();
+	/*Group KS = Group();
 	Faculty FFEKS = Faculty();
 	FFEKS.PrintAllInfo();
 	Student stud1 = Student();
@@ -69,5 +69,5 @@ int main()
 	FFEKS.Add(KS);
 
 	KS.PrintAllInfo();
-	KS.Remove(0);
+	KS.Remove(0);*/
  }

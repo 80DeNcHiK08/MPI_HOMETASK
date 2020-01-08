@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "Faculty.h"
 #include <string>
 
