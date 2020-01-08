@@ -4,7 +4,7 @@
 template<typename K, class V>
 struct TreeNode
 {
-	TreeNode* Left, * Right, * Next, * Prev;
+	TreeNode* Left, * Right, * Next, * Prev, *Parent;
 	K Key;
 	V Value;
 };

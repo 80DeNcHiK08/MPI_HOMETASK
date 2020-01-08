@@ -1,15 +1,14 @@
 #pragma once
-#include "ListNode.h"
 #include "Tree.h"
 
-template<typename K, class V>
+template<class K, class V>
 class List
 {
 private:
 	struct ListNode
 	{
-		TreeNode<K, V> *Data;
-		ListNode *Next;
+		TreeNode<K, V>* Data;
+		ListNode* Next;
 	};
 	ListNode *head, *tail;
 
@@ -32,25 +31,16 @@ private:
 	}
 	void clearlist()
 	{
+		ListNode* pDel = NULL;
 		ListNode* temp = this->head;
 		while (temp != NULL)
 		{
-			ListNode* Next = temp->Next;
-			delete temp;
-			temp = Next;
+			pDel = temp;
+			temp = temp->Next;
+			delete pDel;
+			Count--;
 		}
-	}
-	void replace(TreeNode<K, V>* oldnode, TreeNode<K, V>* newnode)
-	{
-		ListNode* current = head;
-		while (current != NULL)
-		{
-			if (current->Data == oldnode)
-			{
-				current->Data = newnode;
-			}
-			current = current->Next;
-		}
+		head = tail = NULL;
 	}
 	bool getIndex(TreeNode<K, V>* value, int& index)
 	{
@@ -91,32 +81,15 @@ public:
 		head = NULL;
 		tail = NULL;
 	}
-	~List()
+	~List() {}
+	void AddToEnd(TreeNode<K, V>* node)
 	{
-
-	}
-	void AddToEnd(TreeNode<K, V>* tnode)
-	{
-		createNode(tnode);
-	}
-	void Replace(TreeNode<K, V>* oldnode, TreeNode<K, V>* newnode)
-	{
-		replace(oldnode, newnode);
+		createNode(node);
 	}
 	int GetIndex(TreeNode<K, V>* node)
 	{
 		int result;
 		return (getIndex(node, result) ? result : NULL);
-	}
-	bool IfNodeByIndexExists(int index)
-	{
-		TreeNode<K, V>* tmp;
-		return getValue(index, tmp);
-	}
-	bool IfNodeByValueExists(TreeNode<K, V>* node)
-	{
-		int tmp;
-		return getIndex(node, tmp);
 	}
 	TreeNode<K, V>* GetValue(int index)
 	{

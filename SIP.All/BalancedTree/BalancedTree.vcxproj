@@ -152,13 +152,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BalancedTree.cpp" />
+    <ClCompile Include="Faculty.cpp" />
+    <ClCompile Include="Group.cpp" />
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Student.cpp" />
     <ClCompile Include="Tree.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Faculty.h" />
+    <ClInclude Include="Group.h" />
     <ClInclude Include="List.h" />
-    <ClInclude Include="ListNode.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Student.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="TreeNode.h" />
   </ItemGroup>
