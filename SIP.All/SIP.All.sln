@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29519.87
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BalancedTree", "BalancedTree\BalancedTree.vcxproj", "{74EB4D38-E002-462A-8402-2303A91E617C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AVLBasedTree", "AVLBasedTree\AVLBasedTree.vcxproj", "{83A5BFD3-0886-4556-9034-675FD5F7FE19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,14 @@ Global
 		{74EB4D38-E002-462A-8402-2303A91E617C}.Release|x64.Build.0 = Release|x64
 		{74EB4D38-E002-462A-8402-2303A91E617C}.Release|x86.ActiveCfg = Release|Win32
 		{74EB4D38-E002-462A-8402-2303A91E617C}.Release|x86.Build.0 = Release|Win32
+		{83A5BFD3-0886-4556-9034-675FD5F7FE19}.Debug|x64.ActiveCfg = Debug|x64
+		{83A5BFD3-0886-4556-9034-675FD5F7FE19}.Debug|x64.Build.0 = Debug|x64
+		{83A5BFD3-0886-4556-9034-675FD5F7FE19}.Debug|x86.ActiveCfg = Debug|Win32
+		{83A5BFD3-0886-4556-9034-675FD5F7FE19}.Debug|x86.Build.0 = Debug|Win32
+		{83A5BFD3-0886-4556-9034-675FD5F7FE19}.Release|x64.ActiveCfg = Release|x64
+		{83A5BFD3-0886-4556-9034-675FD5F7FE19}.Release|x64.Build.0 = Release|x64
+		{83A5BFD3-0886-4556-9034-675FD5F7FE19}.Release|x86.ActiveCfg = Release|Win32
+		{83A5BFD3-0886-4556-9034-675FD5F7FE19}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
