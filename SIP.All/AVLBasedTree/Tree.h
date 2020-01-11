@@ -16,9 +16,12 @@ private:
 	TreeNode<K, V>* newNode(V value, K key = NULL);
 	TreeNode<K, V>* deleteTree(TreeNode<K, V>* node);
 
+	TreeNode<K, V>* searchDeep(TreeNode<K, V>* current, TreeNode<K, V>* node);
+
 	TreeNode<K, V>* getMin(TreeNode<K, V>* parent);
 	TreeNode<K, V>* getMax(TreeNode<K, V>* parent);
-	void balanceTree(TreeNode<K, V>* parent);
+	int getHeight(TreeNode<K, V>* parent);
+	TreeNode<K, V>* balanceTree(TreeNode<K, V>* parent, int bfactor);
 	int balanceFactor(TreeNode<K, V>* parent);
 	TreeNode<K, V>* RotateR(TreeNode<K, V>* parent);
 	TreeNode<K, V>* RotateL(TreeNode<K, V>* parent);

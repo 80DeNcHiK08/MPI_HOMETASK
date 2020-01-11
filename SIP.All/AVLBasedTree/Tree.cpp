@@ -30,8 +30,12 @@ template<class K, class V>
 typename TreeNode<K, V>* Tree<K, V>::newNode(V value, K key)
 {
 	TreeNode<K, V>* temp = new TreeNode<K, V>;
-	temp->Key = key;
+	if (key == NULL)
+		temp->Key = 0;
+	else
+		temp->Key = key;
 	temp->Value = value;
+	temp->Balance = 0;
 	temp->Left = temp->Right = temp->Prev = temp->Next = temp->Parent = NULL;
 	return temp;
 }
@@ -45,33 +49,7 @@ typename TreeNode<K, V>* Tree<K, V>::recursiveInsert(TreeNode<K, V>* current, Tr
 template<class K, class V>
 void Tree<K, V>::iterativeInsert(TreeNode<K, V>* node)
 {
-	if (node->Key == NULL)
-		node->Key = getMax(Root)->Key;
-	if (Root == NULL)
-	{
-		Root = node;
-		return;
-	}
-	TreeNode<K, V>* current = Root, *parent = NULL;
-	while (current != NULL)
-	{
-		parent = current;
-		if (node->Key < current->Key)
-		{
-			current = current->Left;
-		}
-		else if (node->Key > current->Key)
-		{
-			current = current->Right;
-		}
-	}
-	current = node;
-	if (current->Key < parent->Key)
-		parent->Left = current;
-	else
-		parent->Right = current;
-	current->Parent = parent;
-	balanceTree(parent);
+	
 }
 
 template<typename K, class V>
@@ -99,25 +77,105 @@ typename TreeNode<K, V>* Tree<K, V>::getMin(TreeNode<K, V>* current)
 }
 
 template<class K, class V>
-void Tree<K, V>::balanceTree(TreeNode<K, V>* parent)
+typename TreeNode<K, V>* Tree<K, V>::searchDeep(TreeNode<K, V>* current, TreeNode<K, V>* node)
 {
-	int bfactor = balanceFactor(parent);
+	while (current != NULL)
+	{
+		if (current->Key == node->Key)
+			return current;
+		current = (node->Key < current->Key) ?
+			current = current->Left :
+			current = current->Right;
+	}
+	return current;
+}
+
+template<class K, class V>
+typename TreeNode<K, V>* Tree<K, V>::balanceTree(TreeNode<K, V>* parent, int bfactor)
+{
 	if (bfactor > 1)
 	{
-		parent = (balance_factor(parent->Left) > 0) ?
+		parent = (balanceFactor(parent->Left) > 0) ?
 			RotateL(parent) : RotateLR(parent);
 	}
-	else if (b factor < -1)
+	else if (bfactor < -1)
 	{
-		parent = (balance_factor(parent->Left) > 0) ?
+		parent = (balanceFactor(parent->Right) > 0) ?
 			RotateRL(parent) : RotateR(parent);
 	}
+	return parent;
+}
+
+template<class K, class V>
+int Tree<K, V>::balanceFactor(TreeNode<K, V>* parent)
+{
+	int l = getHeight(parent->Left);
+	int r = getHeight(parent->Right);
+	int b_factor = l - r;
+	return b_factor;
+}
+
+template<class K, class V>
+int Tree<K, V>::getHeight(TreeNode<K, V>* parent)
+{
+	int height = 0;
+	if (parent != NULL)
+	{
+		int l = getHeight(parent->Left);
+		int r = getHeight(parent->Right);
+		int m = (l > r) ? l : r;
+		height = m + 1;
+	}
+	return height;
+}
+
+template<typename K, class V>
+typename TreeNode<K, V>* Tree<K, V>::RotateR(TreeNode<K, V>* parent)
+{
+	TreeNode<K, V>* pivot = parent->Right;
+	parent->Right = pivot->Left;
+	pivot->Left = parent;
+	pivot->Left->Parent = pivot;
+	return pivot;
+}
+
+template<typename K, class V>
+typename TreeNode<K, V>* Tree<K, V>::RotateL(TreeNode<K, V>* parent)
+{
+	TreeNode<K, V>* pivot = parent->Left;
+	parent->Left = pivot->Right;
+	pivot->Right = parent;
+	pivot->Right->Parent = pivot;
+	return pivot;
+}
+
+template<typename K, class V>
+typename TreeNode<K, V>* Tree<K, V>::RotateLR(TreeNode<K, V>* parent)
+{
+	TreeNode<K, V>* pivot = parent->Left;
+	parent->Left = RotateR(pivot);
+	auto result = RotateL(parent);
+	result->Left->Parent = result;
+	return result;
+}
+
+template<typename K, class V>
+typename TreeNode<K, V>* Tree<K, V>::RotateRL(TreeNode<K, V>* parent)
+{
+	TreeNode<K, V>* pivot = parent->Right;
+	parent->Right = RotateL(pivot);
+	auto result = RotateR(parent);
+	result->Right->Parent = result;
+	return result;
 }
 
 template<class K, class V>
 void Tree<K, V>::Add(V value, K key)
 {
 	TreeNode<K, V>* node = newNode(value, key);
-	iterativeInsert(node);
+	if (Root == NULL)
+		Root = node;
+	else
+		iterativeInsert(node);
 }
 
