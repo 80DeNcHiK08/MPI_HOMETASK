@@ -35,7 +35,6 @@ typename TreeNode<K, V>* Tree<K, V>::newNode(V value, K key)
 	else
 		temp->Key = key;
 	temp->Value = value;
-	temp->Balance = 0;
 	temp->Left = temp->Right = temp->Prev = temp->Next = temp->Parent = NULL;
 	return temp;
 }
@@ -49,7 +48,40 @@ typename TreeNode<K, V>* Tree<K, V>::recursiveInsert(TreeNode<K, V>* current, Tr
 template<class K, class V>
 void Tree<K, V>::iterativeInsert(TreeNode<K, V>* node)
 {
-	
+	//1st element
+	if (Root == NULL)
+	{
+		Root = node;
+		return;
+	} 
+	//increasing key
+	if (node->Key == 0)
+		node->Key = getMax(Root)->Key + 1;
+	TreeNode<K, V>* current = Root;
+	TreeNode<K, V>* parent = Root;
+	//search for correct place
+	while (current != NULL)
+	{
+		parent = current;
+		current = (node->Key < current->Key) ?
+			current->Left :
+			current->Right;
+	}
+	//inserting node
+	current = node;
+	current->Parent = parent;
+	if (current->Key < parent->Key)
+		parent->Left = current;
+	else if (current->Key > parent->Key)
+		parent->Right = current;
+	//balancing and rebuilding tree
+	/*while (parent->Parent != NULL)
+	{
+		parent = balanceTree(parent);
+		if(parent->Parent != NULL)
+			parent = parent->Parent;
+	}
+	Root = parent;*/
 }
 
 template<typename K, class V>
@@ -91,8 +123,9 @@ typename TreeNode<K, V>* Tree<K, V>::searchDeep(TreeNode<K, V>* current, TreeNod
 }
 
 template<class K, class V>
-typename TreeNode<K, V>* Tree<K, V>::balanceTree(TreeNode<K, V>* parent, int bfactor)
+typename TreeNode<K, V>* Tree<K, V>::balanceTree(TreeNode<K, V>* parent)
 {
+	int bfactor = balanceFactor(parent);
 	if (bfactor > 1)
 	{
 		parent = (balanceFactor(parent->Left) > 0) ?
@@ -134,6 +167,7 @@ typename TreeNode<K, V>* Tree<K, V>::RotateR(TreeNode<K, V>* parent)
 {
 	TreeNode<K, V>* pivot = parent->Right;
 	parent->Right = pivot->Left;
+	pivot->Parent = parent->Parent;
 	pivot->Left = parent;
 	pivot->Left->Parent = pivot;
 	return pivot;
@@ -144,6 +178,7 @@ typename TreeNode<K, V>* Tree<K, V>::RotateL(TreeNode<K, V>* parent)
 {
 	TreeNode<K, V>* pivot = parent->Left;
 	parent->Left = pivot->Right;
+	pivot->Parent = parent->Parent;
 	pivot->Right = parent;
 	pivot->Right->Parent = pivot;
 	return pivot;
@@ -173,9 +208,11 @@ template<class K, class V>
 void Tree<K, V>::Add(V value, K key)
 {
 	TreeNode<K, V>* node = newNode(value, key);
-	if (Root == NULL)
-		Root = node;
-	else
-		iterativeInsert(node);
+	iterativeInsert(node);
 }
 
+template<class K, class V>
+void Tree<K, V>::PrintAllInfo()
+{
+
+}

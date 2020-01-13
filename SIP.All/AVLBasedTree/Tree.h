@@ -21,7 +21,7 @@ private:
 	TreeNode<K, V>* getMin(TreeNode<K, V>* parent);
 	TreeNode<K, V>* getMax(TreeNode<K, V>* parent);
 	int getHeight(TreeNode<K, V>* parent);
-	TreeNode<K, V>* balanceTree(TreeNode<K, V>* parent, int bfactor);
+	TreeNode<K, V>* balanceTree(TreeNode<K, V>* parent);
 	int balanceFactor(TreeNode<K, V>* parent);
 	TreeNode<K, V>* RotateR(TreeNode<K, V>* parent);
 	TreeNode<K, V>* RotateL(TreeNode<K, V>* parent);
@@ -37,5 +37,6 @@ public:
 
 	int Height() { return height; }
 	int Count() { return count; }
+	void PrintAllInfo();
 };
 
