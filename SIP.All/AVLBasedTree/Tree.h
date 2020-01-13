@@ -23,6 +23,9 @@ private:
 	int getHeight(TreeNode<K, V>* parent);
 	TreeNode<K, V>* balanceTree(TreeNode<K, V>* parent);
 	int balanceFactor(TreeNode<K, V>* parent);
+	void fillLeftMosts();
+	TreeNode<K, V>* connectPair(TreeNode<K, V>* pivot);
+	void connectPairs(TreeNode<K, V>* pivot);
 	TreeNode<K, V>* RotateR(TreeNode<K, V>* parent);
 	TreeNode<K, V>* RotateL(TreeNode<K, V>* parent);
 	TreeNode<K, V>* RotateRL(TreeNode<K, V>* parent);

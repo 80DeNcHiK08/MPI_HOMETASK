@@ -13,7 +13,7 @@ public:
 	Faculty() : Tree<int, Group>() { FacultyName = ""; }
 	Faculty(std::string fname) : Tree<int, Group>() { FacultyName = fname; }
 	Faculty(const Faculty& othfac) : Tree<int, Group>(othfac) { *this = othfac; }
-	~Faculty() { FacultyName.clear(); }
+	~Faculty() { FacultyName.clear(); Tree::~Tree(); }
 
 	Faculty& operator = (const Faculty&);
 	bool operator == (Faculty&);

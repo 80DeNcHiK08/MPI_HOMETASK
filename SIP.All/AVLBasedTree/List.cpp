@@ -24,7 +24,7 @@ void List<K, V>::createNode(TreeNode<K, V>* node)
 		Tail->Next = temp;
 		Tail = temp;
 	}
-	Count++;
+	count++;
 }
 
 template<class K, class V>
@@ -37,7 +37,7 @@ void List<K, V>::clearList()
 		pdel = temp;
 		temp = temp->Next;
 		delete pdel;
-		Count--;
+		count--;
 	}
 	Head = Tail = NULL;
 }
@@ -61,7 +61,7 @@ bool List<K, V>::getIndex(TreeNode<K, V>* value, int& index)
 }
 
 template<class K, class V>
-bool List<K, V>::getValue(int index, TreeNode<K, V>& node)
+bool List<K, V>::getValue(int index, TreeNode<K, V>*& node)
 {
 	ListNode* current = Head;
 	int counter = 0;
@@ -69,7 +69,7 @@ bool List<K, V>::getValue(int index, TreeNode<K, V>& node)
 	{
 		if (counter == index)
 		{
-			node = current->Data;
+			node = current->Value;
 			return true;
 		}
 		current = current->Next;
@@ -85,33 +85,25 @@ void List<K, V>::AddToEnd(TreeNode<K, V>* node)
 }
 
 template<class K, class V>
-bool List<K, V>::TryGetIndex(TreeNode<K, V>* node, int& outindex)
+int List<K, V>::GetIndex(TreeNode<K, V>* node)
 {
 	int result;
-	if (getIndex(node, result))
-	{
-		outindex = result;
-		return true;
-	}
-	else
-	{
-		outindex = NULL;
-		return false;
-	}
+	return (getindex(node, result)) ?
+		result :
+		NULL;
 }
 
 template<class K, class V>
-bool List<K, V>::TryGetValue(int index, TreeNode<K, V>& outnode)
+typename TreeNode<K, V>* List<K, V>::GetValue(int index)
 {
 	TreeNode<K, V>* result;
-	if (getValue(index, result))
-	{
-		outnode = result;
-		return true;
-	}
-	else
-	{
-		outnode = NULL;
-		return false;
-	}
+	return (getValue(index, result)) ?
+		result :
+		NULL;
+}
+
+template<class K, class V>
+void List<K, V>::Clear()
+{
+	clearList();
 }

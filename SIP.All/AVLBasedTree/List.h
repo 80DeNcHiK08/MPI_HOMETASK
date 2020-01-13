@@ -13,7 +13,7 @@ private:
 	ListNode* Head, *Tail;
 	void createNode(TreeNode<K, V>* node);
 	void clearList();
-	bool getValue(int index, TreeNode<K, V>& outnode);
+	bool getValue(int index, TreeNode<K, V>*& outnode);
 	bool getIndex(TreeNode<K, V>* node, int& outindex);
 	int count = 0;
 public:
@@ -21,8 +21,8 @@ public:
 	~List();
 	void AddToEnd(TreeNode<K, V>* node);
 	void Clear();
-	bool TryGetValue(int index, TreeNode<K, V>& outnode);
-	bool TryGetIndex(TreeNode<K, V>* node, int& outindex);
+	TreeNode<K, V>* GetValue(int index);
+	int GetIndex(TreeNode<K, V>* node);
 	int Count() { return count; }
 };
 

@@ -10,7 +10,7 @@ Tree<K, V>::Tree()
 template<class K, class V>
 Tree<K, V>::~Tree() 
 {
-	Root = NULL;
+	Root = deleteTree(Root);
 }
 
 template<class K, class V>
@@ -70,18 +70,35 @@ void Tree<K, V>::iterativeInsert(TreeNode<K, V>* node)
 	//inserting node
 	current = node;
 	current->Parent = parent;
-	if (current->Key < parent->Key)
-		parent->Left = current;
-	else if (current->Key > parent->Key)
+	current->Key < parent->Key ?
+		parent->Left = current :
 		parent->Right = current;
+
 	//balancing and rebuilding tree
-	/*while (parent->Parent != NULL)
+	if (parent->Parent != NULL)
 	{
-		parent = balanceTree(parent);
-		if(parent->Parent != NULL)
-			parent = parent->Parent;
+		TreeNode<K, V>* balancedNode = parent->Parent;
+		while (balancedNode != NULL)
+		{
+			balancedNode = balanceTree(balancedNode);
+			if (balancedNode->Parent == NULL)
+			{
+				Root = balancedNode;
+				break;
+			}
+			else
+			{
+				(balancedNode->Key < balancedNode->Parent->Key) ?
+					balancedNode->Parent->Left = balancedNode :
+					balancedNode->Parent->Right = balancedNode;
+				balancedNode = balancedNode->Parent;
+			}
+		}
 	}
-	Root = parent;*/
+
+	fillLeftMosts();
+	height = LeftMosts.Count();
+	count++;
 }
 
 template<typename K, class V>
@@ -170,6 +187,7 @@ typename TreeNode<K, V>* Tree<K, V>::RotateR(TreeNode<K, V>* parent)
 	pivot->Parent = parent->Parent;
 	pivot->Left = parent;
 	pivot->Left->Parent = pivot;
+
 	return pivot;
 }
 
@@ -181,6 +199,7 @@ typename TreeNode<K, V>* Tree<K, V>::RotateL(TreeNode<K, V>* parent)
 	pivot->Parent = parent->Parent;
 	pivot->Right = parent;
 	pivot->Right->Parent = pivot;
+
 	return pivot;
 }
 
@@ -204,6 +223,33 @@ typename TreeNode<K, V>* Tree<K, V>::RotateRL(TreeNode<K, V>* parent)
 	return result;
 }
 
+template<typename K, class V>
+void Tree<K, V>::fillLeftMosts()
+{
+	LeftMosts.Clear();
+	TreeNode<K, V>* current = Root;
+	while (current != NULL)
+	{
+		LeftMosts.AddToEnd(current);
+		current = (current->Left != NULL) ?
+			current->Left :
+			current->Right;
+	}
+}
+
+template<class K, class V>
+typename TreeNode<K, V>* Tree<K, V>::connectPair(TreeNode<K, V>* pivot)
+{
+	return pivot;
+}
+
+template<typename K, class V>
+void Tree<K, V>::connectPairs(TreeNode<K, V>* parent)
+{
+	
+}
+
+
 template<class K, class V>
 void Tree<K, V>::Add(V value, K key)
 {
@@ -211,8 +257,18 @@ void Tree<K, V>::Add(V value, K key)
 	iterativeInsert(node);
 }
 
+
 template<class K, class V>
 void Tree<K, V>::PrintAllInfo()
 {
-
+	for (int i = 0; i < LeftMosts.Count(); i++)
+	{
+		TreeNode<K, V>* hcurrent = LeftMosts.GetValue(i);
+		while(hcurrent != NULL)
+		{
+			std::cout << hcurrent->Key << "  ";
+			hcurrent = hcurrent->Next;
+		}
+		std::cout << "\n\n";
+	}
 }
