@@ -39,6 +39,22 @@ int main()
 		counter++;
 	}
 	//tree.Remove(7);
-	//tree1 = tree;
 	tree.PrintAllInfo();
+	Student stud1 = Student("Name1",
+							"LastName1",
+							"MidName1",
+							9199,
+							14.3);
+	Student stud2 = Student("Name2",
+							"LastName2",
+							"MidName2",
+							11368,
+							11.2);
+	Faculty ftree = Faculty("FFEKS");
+	Group gtree = Group("KS-16-1");
+	gtree.Add(stud1);
+	gtree.Add(stud2);
+	//ftree.Add(gtree);
+	if(stud1 != stud2)
+		gtree.PrintAllInfo();
 }

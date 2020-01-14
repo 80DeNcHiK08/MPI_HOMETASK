@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Tree.h"
+#include "Student.h"
 
 template<class K, class V>
 Tree<K, V>::Tree()
@@ -46,6 +47,10 @@ void Tree<K, V>::iterativeInsert(TreeNode<K, V>* node)
 	if (Root == NULL)
 	{
 		Root = node;
+		fillLeftMosts();
+		connectPairs(Root);
+		height = LeftMosts.Count();
+		count++;
 		return;
 	} 
 	//increasing key
@@ -108,6 +113,8 @@ void Tree<K, V>::iterativeRemove(K key)
 		min = left:
 		getMin(right);
 	min->Parent = current->Parent;
+	min->Next = current->Next;
+	min->Prev = current->Prev;
 	//deleting node
 	delete current;
 
@@ -141,7 +148,11 @@ typename TreeNode<K, V>* Tree<K, V>::removeMin(TreeNode<K, V>* current)
 {
 	if (current->Left == NULL)
 		return current->Right;
-	current->Left = removeMin(current->Left);
+	while (current->Left != NULL)
+	{
+		current = current->Left;
+	}
+	//current->Left = removeMin(current->Left);
 	return balanceTree(current);
 }
 
@@ -366,12 +377,12 @@ typename Tree<K, V>& Tree<K, V>::operator= (const Tree<K, V>& obj)
 {
 	if (this == &obj)
 		return *this;
-
-	this->Root = obj.Root;
+	
+	Root = obj.Root;
 	return *this;
 }
 
-template<class K, class V>
+/*template<class K, class V>
 void Tree<K, V>::PrintAllInfo()
 {
 	int offset = LeftMosts.Count();
@@ -388,6 +399,20 @@ void Tree<K, V>::PrintAllInfo()
 			hcurrent = hcurrent->Next;
 		}
 		offset--;
+		std::cout << "\n\n";
+	}
+}*/
+
+template<>
+void Tree<int, Student>::PrintAllInfo()
+{
+	for (int i = 0; i < LeftMosts.Count(); i++)
+	{
+		TreeNode<int, Student>* hcurrent = LeftMosts.GetValue(i);
+		while (hcurrent != NULL)
+		{
+			hcurrent->Value.PrintAllInfo();
+		}
 		std::cout << "\n\n";
 	}
 }

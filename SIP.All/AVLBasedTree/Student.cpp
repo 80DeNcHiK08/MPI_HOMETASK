@@ -15,7 +15,7 @@ Student::Student(std::string fname,
 				 std::string lname,
 				 std::string mname,
 				 unsigned short bday,
-				 float mgrade)
+	double mgrade)
 {
 	FirstName = fname;
 	LastName = lname;
@@ -61,7 +61,7 @@ unsigned short Student::GetBirthday()
 	return Birthday;
 }
 
-float Student::GetMidGrade()
+double Student::GetMidGrade()
 {
 	return MidGrade;
 }
@@ -86,7 +86,7 @@ void Student::SetBirthday(unsigned short bday)
 	Birthday = bday;
 }
 
-void Student::SetMidGrade(float mgrade)
+void Student::SetMidGrade(double mgrade)
 {
 	MidGrade = mgrade;
 }

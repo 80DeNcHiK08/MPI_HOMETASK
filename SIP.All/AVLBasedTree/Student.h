@@ -9,7 +9,7 @@ private:
 	std::string LastName;
 	std::string MiddleName;
 	unsigned short Birthday;
-	float MidGrade;
+	double MidGrade;
 	int compareStudents(Student, Student);
 public:
 	Student();
@@ -18,7 +18,7 @@ public:
 			std::string lname,
 			std::string mname, 
 			unsigned short bday,
-			float mgrade);
+			double mgrade);
 	~Student();
 
 	std::string GetFirstName();
@@ -26,13 +26,13 @@ public:
 	std::string GetMiddleName();
 	std::string GetFullName();
 	unsigned short GetBirthday();
-	float GetMidGrade();
+	double GetMidGrade();
 
 	void SetFirstName(std::string fname);
 	void SetLastName(std::string lname);
 	void SetMiddleName(std::string mname);
 	void SetBirthday(unsigned short bday);
-	void SetMidGrade(float mgrade);
+	void SetMidGrade(double mgrade);
 
 	Student& operator = (const Student& othstud);
 	bool operator == (Student &othstud);

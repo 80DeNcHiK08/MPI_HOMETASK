@@ -1,5 +1,26 @@
 #include "pch.h"
 #include "Faculty.h"
+#include "Tree.cpp"
+
+Faculty::Faculty() : Tree<int, Group>() 
+{ 
+	FacultyName = ""; 
+}
+
+Faculty::Faculty(std::string fname) : Tree<int, Group>() 
+{ 
+	FacultyName = fname; 
+}
+
+Faculty::Faculty(const Faculty& othfac) : Tree<int, Group>(othfac) 
+{ 
+	*this = othfac; 
+}
+
+Faculty::~Faculty() 
+{ 
+	FacultyName.clear(); Tree::~Tree(); 
+}
 
 int Faculty::compareFaculty(const Faculty first, const Faculty second)
 {

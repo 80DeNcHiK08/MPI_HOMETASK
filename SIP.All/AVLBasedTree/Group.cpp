@@ -1,5 +1,27 @@
 #include "pch.h"
 #include "Group.h"
+#include "Tree.cpp" 
+
+Group::Group() : Tree<int, Student>()
+{
+	GroupName = "";
+}
+
+Group::Group(std::string gname) : Tree<int, Student>() 
+{ 
+	GroupName = gname; 
+}
+
+Group::Group(const Group& othgroup) : Tree<int, Student>(othgroup) 
+{ 
+	*this = othgroup; 
+}
+
+Group::~Group()
+{ 
+	GroupName.clear(); 
+	Tree::~Tree(); 
+};
 
 int Group::compareGroups(const Group first, const Group second)
 {

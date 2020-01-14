@@ -9,10 +9,10 @@ private:
 protected:
 	std::string GroupName;
 public:
-	Group() : Tree<int, Student>() { GroupName = ""; }
-	Group(std::string gname) : Tree<int, Student>() { GroupName = gname; }
-	Group(const Group& othgroup) : Tree<int, Student>(othgroup) { *this = othgroup; }
-	~Group() { GroupName.clear(); Tree::~Tree(); };
+	Group();
+	Group(std::string gname);
+	Group(const Group& othgroup);
+	~Group();
 	
 	Group& operator = (const Group&);
 	bool operator == (Group&);
