@@ -22,7 +22,7 @@ typename TreeNode<K, V>* Tree<K, V>::deleteTree(TreeNode<K, V>* node)
 	{
 		deleteTree(node->Left);
 		deleteTree(node->Right);
-		delete node;
+		node = NULL;
 	}
 	return NULL;
 }

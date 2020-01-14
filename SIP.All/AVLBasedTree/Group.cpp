@@ -19,8 +19,7 @@ Group::Group(const Group& othgroup) : Tree<int, Student>(othgroup)
 
 Group::~Group()
 { 
-	GroupName.clear(); 
-	Tree::~Tree(); 
+	GroupName.clear();
 };
 
 int Group::compareGroups(const Group first, const Group second)

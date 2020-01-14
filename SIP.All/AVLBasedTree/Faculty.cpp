@@ -19,7 +19,7 @@ Faculty::Faculty(const Faculty& othfac) : Tree<int, Group>(othfac)
 
 Faculty::~Faculty() 
 { 
-	FacultyName.clear(); Tree::~Tree(); 
+	FacultyName.clear();
 }
 
 int Faculty::compareFaculty(const Faculty first, const Faculty second)
