@@ -105,42 +105,39 @@ void Tree<K, V>::iterativeRemove(K key)
 {
 	//search node to delete
 	TreeNode<K, V>* current = searchDeep(Root, key);
-
 	//replace node with min from right route
-	TreeNode<K, V>* left = current->Left;
-	TreeNode<K, V>* right = current->Right;
-	TreeNode<K, V>* min = (right == NULL) ?
-		min = left:
-		getMin(right);
-	min->Parent = current->Parent;
-	min->Next = current->Next;
-	min->Prev = current->Prev;
+	TreeNode<K, V>* min = (current->Right == NULL) ?
+		min = current->Left:
+		getMin(current->Right);
+	current->Value = min->Value;
+	current->Key = min->Key;
 	//deleting node
-	delete current;
-
-	min->Right = removeMin(right);
-	min->Left = left;
-	min->Right->Parent = min->Left->Parent = min;
+	TreeNode<K, V>* parent = min->Parent;
+	parent->Left = NULL;
+	min->Next->Prev = min->Prev->Next = NULL;
+	min = NULL;
 	//rebalance and rebuild tree
-	while (min != NULL)
+	while (parent != NULL)
 	{
-		if (min->Parent == NULL)
+		parent = balanceTree(parent);
+		if (parent->Parent == NULL)
 		{
-			Root = min;
+			Root = parent;
 			break;
 		}
 		else
 		{
-			(min->Key < min->Parent->Key) ?
-				min->Parent->Left = min :
-				min->Parent->Right = min;
-			min = min->Parent;
+			(parent->Key < parent->Parent->Key) ?
+				parent->Parent->Left = parent :
+				parent->Parent->Right = parent;
+			parent = parent->Parent;
 		}
 	}
-	fillLeftMosts();
 	connectPairs(Root);
+	fillLeftMosts();
 	height = LeftMosts.Count();
 	count--;
+	delete min;
 }
 
 template<typename K, class V>
@@ -148,11 +145,7 @@ typename TreeNode<K, V>* Tree<K, V>::removeMin(TreeNode<K, V>* current)
 {
 	if (current->Left == NULL)
 		return current->Right;
-	while (current->Left != NULL)
-	{
-		current = current->Left;
-	}
-	//current->Left = removeMin(current->Left);
+	current->Left = removeMin(current->Left);
 	return balanceTree(current);
 }
 
@@ -286,7 +279,6 @@ typename TreeNode<K, V>* Tree<K, V>::RotateL(TreeNode<K, V>* parent)
 	pivot->Parent = parent->Parent;
 	pivot->Right = parent;
 	pivot->Right->Parent = pivot;
-
 	return pivot;
 }
 

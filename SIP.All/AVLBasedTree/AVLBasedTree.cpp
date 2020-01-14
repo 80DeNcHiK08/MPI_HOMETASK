@@ -10,21 +10,14 @@ using namespace std;
 
 int main()
 {
-	/*for (int i = 0; i < 15; i++)
-	{
-		Student st;
-		Group g;
-		Faculty f;
-		tree.Add(f);
-	}*/
 	Tree<int, int> tree;
 	
 	double duration;
 	int counter = 1;
-	for (int i = 0; i < 33; i++)
+	for (int i = 0; i < 19; i++)
 	{
 		clock_t start = clock();
-		tree.Add(1);
+		tree.Add(rand());
 		duration = ((double)clock() - start) / (double)CLOCKS_PER_SEC;
 		string s;
 		int scase = counter % 10;
@@ -38,8 +31,20 @@ int main()
 		cout << "Adding " << counter << "'" << s << " element; Time: " << duration << endl;
 		counter++;
 	}
-	//tree.Remove(7);
+
+	TreeNode<int, int>* result;
+	if (tree.Find(7, result, false))
+		cout << "Success! Value is: " << result->Value << endl;
+	else
+		cout << "There is no value with such key" << endl;
 	tree.PrintLevelOrder();
+	tree.Remove(7);
+	if (tree.Find(7, result, true))
+		cout << "Success! Value is: " << result->Value << endl;
+	else
+		cout << "There is no value with such key" << endl;
+	tree.PrintLevelOrder();
+
 	Student stud1 = Student("Name1",
 							"LastName1",
 							"MidName1",
@@ -50,8 +55,10 @@ int main()
 							"MidName2",
 							11368,
 							11.2);
+
 	Faculty ftree = Faculty("FFEKS");
 	Group gtree = Group("KS-16-1");
+
 	gtree.Add(stud1);
 	gtree.Add(stud2);
 	ftree.Add(gtree);
