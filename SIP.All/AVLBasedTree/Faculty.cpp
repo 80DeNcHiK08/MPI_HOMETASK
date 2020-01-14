@@ -48,5 +48,5 @@ bool Faculty::operator > (Faculty& obj)
 
 void Faculty::PrintAllInfo() {
 	std::cout << "FacultyName: " << FacultyName;
-	//Tree<int, Group>::PrintAllInfo();
+	Tree<int, Group>::PrintAllInfo();
 }

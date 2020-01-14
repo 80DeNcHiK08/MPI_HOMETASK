@@ -40,12 +40,6 @@ typename TreeNode<K, V>* Tree<K, V>::newNode(V value, K key)
 }
 
 template<class K, class V>
-typename TreeNode<K, V>* Tree<K, V>::recursiveInsert(TreeNode<K, V>* current, TreeNode<K, V>* node)
-{
-
-}
-
-template<class K, class V>
 void Tree<K, V>::iterativeInsert(TreeNode<K, V>* node)
 {
 	//1st element
@@ -95,10 +89,60 @@ void Tree<K, V>::iterativeInsert(TreeNode<K, V>* node)
 			}
 		}
 	}
-
 	fillLeftMosts();
+	connectPairs(Root);
 	height = LeftMosts.Count();
 	count++;
+}
+
+template<typename K, class V>
+void Tree<K, V>::iterativeRemove(K key)
+{
+	//search node to delete
+	TreeNode<K, V>* current = searchDeep(Root, key);
+
+	//replace node with min from right route
+	TreeNode<K, V>* left = current->Left;
+	TreeNode<K, V>* right = current->Right;
+	TreeNode<K, V>* min = (right == NULL) ?
+		min = left:
+		getMin(right);
+	min->Parent = current->Parent;
+	//deleting node
+	delete current;
+
+	min->Right = removeMin(right);
+	min->Left = left;
+	min->Right->Parent = min->Left->Parent = min;
+	//rebalance and rebuild tree
+	while (min != NULL)
+	{
+		if (min->Parent == NULL)
+		{
+			Root = min;
+			break;
+		}
+		else
+		{
+			(min->Key < min->Parent->Key) ?
+				min->Parent->Left = min :
+				min->Parent->Right = min;
+			min = min->Parent;
+		}
+	}
+	fillLeftMosts();
+	connectPairs(Root);
+	height = LeftMosts.Count();
+	count--;
+}
+
+template<typename K, class V>
+typename TreeNode<K, V>* Tree<K, V>::removeMin(TreeNode<K, V>* current)
+{
+	if (current->Left == NULL)
+		return current->Right;
+	current->Left = removeMin(current->Left);
+	return balanceTree(current);
 }
 
 template<typename K, class V>
@@ -126,17 +170,49 @@ typename TreeNode<K, V>* Tree<K, V>::getMin(TreeNode<K, V>* current)
 }
 
 template<class K, class V>
-typename TreeNode<K, V>* Tree<K, V>::searchDeep(TreeNode<K, V>* current, TreeNode<K, V>* node)
+typename TreeNode<K, V>* Tree<K, V>::searchDeep(TreeNode<K, V>* current, K key , V value)
 {
 	while (current != NULL)
 	{
-		if (current->Key == node->Key)
-			return current;
-		current = (node->Key < current->Key) ?
-			current = current->Left :
-			current = current->Right;
+		if (key != NULL)
+		{
+			if (current->Key == key)
+				return current;
+		}
+		else if(value != NULL)
+		{
+			if (current->Value == value)
+				return current;
+		}
+		current = (key < current->Key) ?
+			current->Left :
+			current->Right;
 	}
 	return current;
+}
+
+template<class K, class V>
+typename TreeNode<K, V>* Tree<K, V>::searchWide(K key, V value)
+{
+	for (int i = 0; i < LeftMosts.Count(); i++)
+	{
+		TreeNode<K, V>* hcurrent = LeftMosts.GetValue(i);
+		while (hcurrent != NULL)
+		{
+			if (key != NULL)
+			{
+				if (hcurrent->Key == key)
+					return hcurrent;
+			}
+			else if (value != NULL)
+			{
+				if (hcurrent->Value == value)
+					return hcurrent;
+			}
+			hcurrent = hcurrent->Next;
+		}
+	}
+	return NULL;
 }
 
 template<class K, class V>
@@ -237,16 +313,18 @@ void Tree<K, V>::fillLeftMosts()
 	}
 }
 
-template<class K, class V>
-typename TreeNode<K, V>* Tree<K, V>::connectPair(TreeNode<K, V>* pivot)
-{
-	return pivot;
-}
-
 template<typename K, class V>
 void Tree<K, V>::connectPairs(TreeNode<K, V>* parent)
 {
-	
+	if (parent == NULL)
+		return;
+	if (parent->Right != NULL && parent->Left != NULL)
+	{
+		parent->Left->Next = parent->Right;
+		parent->Right->Prev = parent->Left;
+	}
+	connectPairs(parent->Left);
+	connectPairs(parent->Right);
 }
 
 
@@ -257,18 +335,59 @@ void Tree<K, V>::Add(V value, K key)
 	iterativeInsert(node);
 }
 
+template<class K, class V>
+void Tree<K, V>::Remove(K key)
+{
+	iterativeRemove(key);
+}
+
+template<class K, class V>
+bool Tree<K, V>::Find(K key, TreeNode<K, V>* &result, bool searchType)
+{
+	TreeNode<K, V>* outres = NULL;
+	result = (searchType) ?
+		searchDeep(Root, key) :
+		searchWide(key);
+	return (result) ? true : false;
+}
+
+template<class K, class V>
+bool Tree<K, V>::Find(V value, bool searchType)
+{
+	TreeNode<K, V>* outres = NULL;
+	outres = (searchType) ?
+		searchDeep(Root, NULL, value) :
+		searchWide(NULL, value);
+	return (outres) ? true : false;
+}
+
+template<class K, class V>
+typename Tree<K, V>& Tree<K, V>::operator= (const Tree<K, V>& obj)
+{
+	if (this == &obj)
+		return *this;
+
+	this->Root = obj.Root;
+	return *this;
+}
 
 template<class K, class V>
 void Tree<K, V>::PrintAllInfo()
 {
+	int offset = LeftMosts.Count();
 	for (int i = 0; i < LeftMosts.Count(); i++)
 	{
 		TreeNode<K, V>* hcurrent = LeftMosts.GetValue(i);
+		for (int j = 0; j < offset; j++)
+			std::cout << "\t ";
 		while(hcurrent != NULL)
 		{
-			std::cout << hcurrent->Key << "  ";
+			std::cout << hcurrent->Key;
+			for (int j = 0; j < offset; j++)
+				std::cout << "   ";
 			hcurrent = hcurrent->Next;
 		}
+		offset--;
 		std::cout << "\n\n";
 	}
 }

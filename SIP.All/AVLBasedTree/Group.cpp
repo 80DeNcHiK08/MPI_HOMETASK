@@ -10,7 +10,7 @@ Group& Group::operator= (const Group& obj) {
 	if (this == &obj)
 		return *this;
 	GroupName = obj.GroupName;
-	Tree::operator = (obj);
+	Tree::operator=(obj);
 	return *this;
 }
 
@@ -46,5 +46,5 @@ bool Group::operator>(Group& obj)
 
 void Group::PrintAllInfo() {
 	std::cout << "\nGroup Name: " << GroupName;
-	//Tree<int, Student>::PrintAllInfo();
+	Tree<int, Student>::PrintAllInfo();
 }

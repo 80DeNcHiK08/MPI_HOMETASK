@@ -10,7 +10,6 @@ using namespace std;
 
 int main()
 {
-	Tree<int, Faculty> tree1;
 	/*for (int i = 0; i < 15; i++)
 	{
 		Student st;
@@ -22,10 +21,10 @@ int main()
 	
 	double duration;
 	int counter = 1;
-	for (int i = 0; i < 16; i++)
+	for (int i = 0; i < 33; i++)
 	{
 		clock_t start = clock();
-		tree.Add(1, rand());
+		tree.Add(1);
 		duration = ((double)clock() - start) / (double)CLOCKS_PER_SEC;
 		string s;
 		int scase = counter % 10;
@@ -39,5 +38,7 @@ int main()
 		cout << "Adding " << counter << "'" << s << " element; Time: " << duration << endl;
 		counter++;
 	}
+	//tree.Remove(7);
+	//tree1 = tree;
 	tree.PrintAllInfo();
 }
