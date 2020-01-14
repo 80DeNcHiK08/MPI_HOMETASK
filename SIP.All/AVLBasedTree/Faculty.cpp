@@ -69,5 +69,14 @@ bool Faculty::operator > (Faculty& obj)
 
 void Faculty::PrintAllInfo() {
 	std::cout << "FacultyName: " << FacultyName;
-	Tree<int, Group>::PrintAllInfo();
+	for (int i = 0; i < LeftMosts.Count(); i++)
+	{
+		TreeNode<int, Group>* hcurrent = LeftMosts.GetValue(i);
+		while (hcurrent != NULL)
+		{
+			hcurrent->Value.PrintAllInfo();
+			hcurrent = hcurrent->Next;
+		}
+		std::cout << "\n";
+	}
 }

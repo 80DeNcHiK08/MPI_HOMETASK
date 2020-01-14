@@ -6,8 +6,10 @@
 template<class K, class V>
 class Tree
 {
-private:
+protected:
 	List<K, V> LeftMosts;
+private:
+	
 	TreeNode<K, V>* Root;
 	
 	
@@ -47,6 +49,7 @@ public:
 	Tree<K, V>& operator = (const Tree<K, V>& othtree);
 	int Height() { return height; }
 	int Count() { return count; }
+	void PrintLevelOrder();
 	void PrintAllInfo();
 };
 

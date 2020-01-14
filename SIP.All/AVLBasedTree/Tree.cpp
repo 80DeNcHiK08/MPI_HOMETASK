@@ -382,8 +382,8 @@ typename Tree<K, V>& Tree<K, V>::operator= (const Tree<K, V>& obj)
 	return *this;
 }
 
-/*template<class K, class V>
-void Tree<K, V>::PrintAllInfo()
+template<class K, class V>
+void Tree<K, V>::PrintLevelOrder()
 {
 	int offset = LeftMosts.Count();
 	for (int i = 0; i < LeftMosts.Count(); i++)
@@ -399,20 +399,6 @@ void Tree<K, V>::PrintAllInfo()
 			hcurrent = hcurrent->Next;
 		}
 		offset--;
-		std::cout << "\n\n";
-	}
-}*/
-
-template<>
-void Tree<int, Student>::PrintAllInfo()
-{
-	for (int i = 0; i < LeftMosts.Count(); i++)
-	{
-		TreeNode<int, Student>* hcurrent = LeftMosts.GetValue(i);
-		while (hcurrent != NULL)
-		{
-			hcurrent->Value.PrintAllInfo();
-		}
 		std::cout << "\n\n";
 	}
 }

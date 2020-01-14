@@ -162,5 +162,5 @@ bool Student::operator > (Student& obj)
 
 void Student::PrintAllInfo()
 {
-	std::cout << "Student: " << this;
+	std::cout << "\nStudent: " << *this;
 }

@@ -68,5 +68,14 @@ bool Group::operator>(Group& obj)
 
 void Group::PrintAllInfo() {
 	std::cout << "\nGroup Name: " << GroupName;
-	Tree<int, Student>::PrintAllInfo();
+	for (int i = 0; i < LeftMosts.Count(); i++)
+	{
+		TreeNode<int, Student>* hcurrent = LeftMosts.GetValue(i);
+		while (hcurrent != NULL)
+		{
+			hcurrent->Value.PrintAllInfo();
+			hcurrent = hcurrent->Next;
+		}
+		std::cout << "\n";
+	}
 }

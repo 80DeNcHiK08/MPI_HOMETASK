@@ -39,7 +39,7 @@ int main()
 		counter++;
 	}
 	//tree.Remove(7);
-	tree.PrintAllInfo();
+	tree.PrintLevelOrder();
 	Student stud1 = Student("Name1",
 							"LastName1",
 							"MidName1",
@@ -54,7 +54,7 @@ int main()
 	Group gtree = Group("KS-16-1");
 	gtree.Add(stud1);
 	gtree.Add(stud2);
-	//ftree.Add(gtree);
+	ftree.Add(gtree);
 	if(stud1 != stud2)
-		gtree.PrintAllInfo();
+		ftree.PrintAllInfo();
 }
