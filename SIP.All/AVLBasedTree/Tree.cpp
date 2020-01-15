@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Tree.h"
 #include "Student.h"
+#include "queue"
 
 template<class K, class V>
 Tree<K, V>::Tree()
@@ -100,7 +101,7 @@ void Tree<K, V>::iterativeInsert(TreeNode<K, V>* node)
 	count++;
 }
 
-template<typename K, class V>
+/*template<typename K, class V>
 void Tree<K, V>::iterativeRemove(K key)
 {
 	//search node to delete
@@ -114,7 +115,8 @@ void Tree<K, V>::iterativeRemove(K key)
 	//deleting node
 	TreeNode<K, V>* parent = min->Parent;
 	parent->Left = NULL;
-	min->Next->Prev = min->Prev->Next = NULL;
+	//min->Next->Prev = min->Prev;
+	//min->Prev->Next = min->Next;
 	min = NULL;
 	//rebalance and rebuild tree
 	while (parent != NULL)
@@ -133,21 +135,74 @@ void Tree<K, V>::iterativeRemove(K key)
 			parent = parent->Parent;
 		}
 	}
-	connectPairs(Root);
+	//connectPairs(Root);
 	fillLeftMosts();
+	ReLink(Root);
 	height = LeftMosts.Count();
 	count--;
 	delete min;
-}
+}*/
 
 template<typename K, class V>
+void Tree<K, V>::recursiveRemove(TreeNode<K, V>* parent, TreeNode<K, V>* current, K key)
+{
+	//search node to delete
+	if (current == NULL)
+		return;
+	if (current->Key == key)
+	{
+		if (current->Left == NULL && current->Right == NULL)
+		{
+			if (parent->Key == current->Key)
+				Root = NULL;
+			else if (parent->Right == current)
+				parent->Right == NULL;
+			else
+				parent->Left = NULL;
+			parent = balanceTree(parent);
+		}
+		else if (current->Left != NULL && current->Right == NULL)
+		{
+			int s = current->Key;
+			current->Key = current->Left->Key;
+			current->Left->Key = s;
+			recursiveRemove(current, current->Left, key);
+		}
+		else if (current->Left == NULL && current->Right == NULL)
+		{
+			int s = current->Key;
+			current->Key = current->Right->Key;
+			current->Right->Key = s;
+			recursiveRemove(current, current->Right, key);
+		}
+		else
+		{
+			TreeNode<K, V>* temp = current->Right;
+			int flag = 0;
+			while (temp->Left != NULL)
+			{
+				flag = 1;
+				parent = temp;
+				temp = temp->Left;
+			}
+			if (!flag)
+				parent = current;
+			int s = current->Key;
+			current->Key = temp->Key;
+			temp->Key = s;
+			recursiveRemove(parent, temp, temp->Key);
+		}
+	}
+}
+
+/*template<typename K, class V>
 typename TreeNode<K, V>* Tree<K, V>::removeMin(TreeNode<K, V>* current)
 {
 	if (current->Left == NULL)
 		return current->Right;
 	current->Left = removeMin(current->Left);
 	return balanceTree(current);
-}
+}*/
 
 template<typename K, class V>
 typename TreeNode<K, V>* Tree<K, V>::getMax(TreeNode<K, V>* current)
@@ -316,18 +371,42 @@ void Tree<K, V>::fillLeftMosts()
 	}
 }
 
-template<typename K, class V>
-void Tree<K, V>::connectPairs(TreeNode<K, V>* parent)
-{
-	if (parent == NULL)
+template<class K, class V>
+void Tree<K, V>::connectPairs(TreeNode<K, V> *temp) {
+	if (temp == NULL) {
 		return;
-	if (parent->Right != NULL && parent->Left != NULL)
-	{
-		parent->Left->Next = parent->Right;
-		parent->Right->Prev = parent->Left;
 	}
-	connectPairs(parent->Left);
-	connectPairs(parent->Right);
+
+	std::queue<TreeNode<K, V> *> q;
+	TreeNode<K, V> *prev = NULL;
+	TreeNode<K, V> *current = NULL;
+
+	q.push(temp);
+	q.push(NULL);
+
+	while (q.size() > 1) {
+		current = q.front();
+		q.pop();
+
+		if (current == NULL) {
+			q.push(NULL);
+		}
+		else {
+			if (prev != NULL) {
+				std::cout << "link" << prev->Key << " to " << current->Key << std::endl;
+				prev->Next = current;
+			}
+
+			if (current->Left) {
+				q.push(current->Left);
+			}
+
+			if (current->Right) {
+				q.push(current->Right);
+			}
+		}
+		prev = current;
+	}
 }
 
 
@@ -341,7 +420,8 @@ void Tree<K, V>::Add(V value, K key)
 template<class K, class V>
 void Tree<K, V>::Remove(K key)
 {
-	iterativeRemove(key);
+	TreeNode<K, V>* sres = searchDeep(Root, key);
+	recursiveRemove(Root, sres, key);
 }
 
 template<class K, class V>
@@ -372,25 +452,4 @@ typename Tree<K, V>& Tree<K, V>::operator= (const Tree<K, V>& obj)
 	
 	Root = obj.Root;
 	return *this;
-}
-
-template<class K, class V>
-void Tree<K, V>::PrintLevelOrder()
-{
-	int offset = LeftMosts.Count();
-	for (int i = 0; i < LeftMosts.Count(); i++)
-	{
-		TreeNode<K, V>* hcurrent = LeftMosts.GetValue(i);
-		for (int j = 0; j < offset; j++)
-			std::cout << "\t ";
-		while(hcurrent != NULL)
-		{
-			std::cout << hcurrent->Key;
-			for (int j = 0; j < offset; j++)
-				std::cout << "   ";
-			hcurrent = hcurrent->Next;
-		}
-		offset--;
-		std::cout << "\n\n";
-	}
 }

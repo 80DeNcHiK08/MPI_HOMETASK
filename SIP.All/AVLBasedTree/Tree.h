@@ -19,7 +19,7 @@ private:
 	TreeNode<K, V>* deleteTree(TreeNode<K, V>* node);
 
 	//TreeNode<K, V>* recursiveRemove(K key, TreeNode<K, V>* current);
-	void iterativeRemove(K key);
+	void recursiveRemove(TreeNode<K, V>* parent, TreeNode<K, V>* current, K key);
 
 	TreeNode<K, V>* searchDeep(TreeNode<K, V>* current, K key = NULL, V value = NULL);
 	TreeNode<K, V>* searchWide(K key = NULL, V value = NULL);
@@ -49,7 +49,5 @@ public:
 	Tree<K, V>& operator = (const Tree<K, V>& othtree);
 	int Height() { return height; }
 	int Count() { return count; }
-	void PrintLevelOrder();
-	void PrintAllInfo();
 };
 

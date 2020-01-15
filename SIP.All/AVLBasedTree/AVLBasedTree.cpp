@@ -14,7 +14,7 @@ int main()
 	
 	double duration;
 	int counter = 1;
-	for (int i = 0; i < 19; i++)
+	for (int i = 0; i < 33; i++)
 	{
 		clock_t start = clock();
 		tree.Add(rand());
@@ -37,13 +37,11 @@ int main()
 		cout << "Success! Value is: " << result->Value << endl;
 	else
 		cout << "There is no value with such key" << endl;
-	tree.PrintLevelOrder();
 	tree.Remove(7);
 	if (tree.Find(7, result, true))
 		cout << "Success! Value is: " << result->Value << endl;
 	else
 		cout << "There is no value with such key" << endl;
-	tree.PrintLevelOrder();
 
 	Student stud1 = Student("Name1",
 							"LastName1",
