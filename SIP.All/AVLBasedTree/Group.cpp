@@ -75,6 +75,6 @@ void Group::PrintAllInfo() {
 			hcurrent->Value.PrintAllInfo();
 			hcurrent = hcurrent->Next;
 		}
-		std::cout << "\n";
+		std::cout << "\n\n";
 	}
 }

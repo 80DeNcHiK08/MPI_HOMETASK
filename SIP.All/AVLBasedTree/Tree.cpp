@@ -193,16 +193,8 @@ void Tree<K, V>::recursiveRemove(TreeNode<K, V>* parent, TreeNode<K, V>* current
 			recursiveRemove(parent, temp, temp->Key);
 		}
 	}
+	connectPairs(Root);
 }
-
-/*template<typename K, class V>
-typename TreeNode<K, V>* Tree<K, V>::removeMin(TreeNode<K, V>* current)
-{
-	if (current->Left == NULL)
-		return current->Right;
-	current->Left = removeMin(current->Left);
-	return balanceTree(current);
-}*/
 
 template<typename K, class V>
 typename TreeNode<K, V>* Tree<K, V>::getMax(TreeNode<K, V>* current)
@@ -393,7 +385,7 @@ void Tree<K, V>::connectPairs(TreeNode<K, V> *temp) {
 		}
 		else {
 			if (prev != NULL) {
-				std::cout << "link" << prev->Key << " to " << current->Key << std::endl;
+				//std::cout << "link" << prev->Key << " to " << current->Key << std::endl;
 				prev->Next = current;
 			}
 
@@ -452,4 +444,25 @@ typename Tree<K, V>& Tree<K, V>::operator= (const Tree<K, V>& obj)
 	
 	Root = obj.Root;
 	return *this;
+}
+
+template<class K, class V>
+void Tree<K, V>::PrintLevelOrder()
+{
+	int offset = LeftMosts.Count();
+	for (int i = 0; i < LeftMosts.Count(); i++)
+	{
+		TreeNode<K, V>* hcurrent = LeftMosts.GetValue(i);
+		while (hcurrent != NULL)
+		{
+			for (int j = 0; j < offset; j++)
+				std::cout << "   ";
+			
+			std::cout << hcurrent->Key << "  ";
+
+			hcurrent = hcurrent->Next;
+		}
+		offset--;
+		std::cout << "\n\n";
+	}
 }

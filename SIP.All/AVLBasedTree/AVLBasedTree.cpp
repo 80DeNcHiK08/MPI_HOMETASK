@@ -28,7 +28,7 @@ int main()
 		case 3: s = "rd"; break;
 		default: s = "th"; break;
 		}
-		cout << "Adding " << counter << "'" << s << " element; Time: " << duration << endl;
+		cout << "Inserting " << counter << "'" << s << " element; Time: " << duration << endl;
 		counter++;
 	}
 
@@ -37,11 +37,13 @@ int main()
 		cout << "Success! Value is: " << result->Value << endl;
 	else
 		cout << "There is no value with such key" << endl;
+	tree.PrintLevelOrder();
 	tree.Remove(7);
-	if (tree.Find(7, result, true))
+	if (tree.Find(7, result, false))
 		cout << "Success! Value is: " << result->Value << endl;
 	else
 		cout << "There is no value with such key" << endl;
+	tree.PrintLevelOrder();
 
 	Student stud1 = Student("Name1",
 							"LastName1",

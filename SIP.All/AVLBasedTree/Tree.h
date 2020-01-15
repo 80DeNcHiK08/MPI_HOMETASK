@@ -49,5 +49,6 @@ public:
 	Tree<K, V>& operator = (const Tree<K, V>& othtree);
 	int Height() { return height; }
 	int Count() { return count; }
+	void PrintLevelOrder();
 };
 
