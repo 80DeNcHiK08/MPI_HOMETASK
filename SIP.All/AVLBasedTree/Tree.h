@@ -13,12 +13,10 @@ private:
 	TreeNode<K, V>* Root;
 	
 	
-	//TreeNode<K, V>* recursiveInsert(TreeNode<K, V>* current, TreeNode<K, V>* node);
 	void iterativeInsert(TreeNode<K, V>* node);
 	TreeNode<K, V>* newNode(V value, K key = NULL);
 	TreeNode<K, V>* deleteTree(TreeNode<K, V>* node);
 
-	//TreeNode<K, V>* recursiveRemove(K key, TreeNode<K, V>* current);
 	void recursiveRemove(TreeNode<K, V>* parent, TreeNode<K, V>* current, K key);
 
 	TreeNode<K, V>* searchDeep(TreeNode<K, V>* current, K key = NULL, V value = NULL);

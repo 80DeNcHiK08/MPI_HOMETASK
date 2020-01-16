@@ -55,6 +55,11 @@ int main()
 							"MidName2",
 							11368,
 							11.2);
+	Student stud3 = Student("Name2",
+							"LastName2",
+							"MidName2",
+							11368,
+							11.2);
 
 	Faculty ftree = Faculty("FFEKS");
 	Group gtree = Group("KS-16-1");
@@ -62,6 +67,10 @@ int main()
 	gtree.Add(stud1);
 	gtree.Add(stud2);
 	ftree.Add(gtree);
-	if(stud1 != stud2)
-		ftree.PrintAllInfo();
+	if (stud1 != stud3)
+		cout << "Theese studends are different;\n";
+	else
+		cout << "Theese students are the same!\n";
+
+	system("Pause");
 }

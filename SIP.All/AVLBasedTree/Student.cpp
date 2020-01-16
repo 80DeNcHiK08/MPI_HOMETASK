@@ -122,12 +122,14 @@ Student& Student::operator = (const Student& obj)
 
 int Student::compareStudents(const Student first, const Student second)
 {
-	return first.LastName.compare(second.LastName) > 0 ? 1 :
-		(second.LastName.compare(first.LastName) > 0 ? -1 :
-		(first.FirstName.compare(second.FirstName) > 0 ? 1 :
-			(second.FirstName.compare(first.FirstName) > 0 ? -1 :
-			(first.MiddleName.compare(second.MiddleName) > 0 ? 1 :
-				(second.MiddleName.compare(first.MiddleName) > 0 ? -1 : 0)))));
+	std::string compiledFirstName = first.LastName + first.MiddleName + first.FirstName;
+	std::string compiledSecondName = second.LastName + second.MiddleName + second.FirstName;
+	if (compiledFirstName.compare(compiledSecondName) > 0)
+		return 1;
+	else if (compiledFirstName.compare(compiledSecondName) < 0)
+		return -1;
+	else
+		return 0;
 }
 
 bool Student::operator == (Student& obj)
