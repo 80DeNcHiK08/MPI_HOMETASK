@@ -105,20 +105,24 @@ void Tree<K, V>::iterativeInsert(TreeNode<K, V>* node)
 template<typename K, class V>
 void Tree<K, V>::recursiveRemove(TreeNode<K, V>* parent, TreeNode<K, V>* current, K key)
 {
-	//search node to delete
 	if (current == NULL)
 		return;
 	if (current->Key == key)
 	{
 		if (current->Left == NULL && current->Right == NULL)
 		{
+			parent = current->Parent;
 			if (parent->Key == current->Key)
 				Root = NULL;
 			else if (parent->Right == current)
-				parent->Right == NULL;
+				parent->Right = NULL;
 			else
 				parent->Left = NULL;
 			parent = balanceTree(parent);
+			fillLeftMosts();
+			connectPairs(Root);
+			height = LeftMosts.Count();
+			count--;
 		}
 		else if (current->Left != NULL && current->Right == NULL)
 		{
@@ -152,10 +156,6 @@ void Tree<K, V>::recursiveRemove(TreeNode<K, V>* parent, TreeNode<K, V>* current
 			recursiveRemove(parent, temp, temp->Key);
 		}
 	}
-	fillLeftMosts();
-	connectPairs(Root);
-	height = LeftMosts.Count();
-	count--;
 }
 
 template<typename K, class V>
@@ -273,10 +273,11 @@ typename TreeNode<K, V>* Tree<K, V>::RotateR(TreeNode<K, V>* parent)
 {
 	TreeNode<K, V>* pivot = parent->Right;
 	parent->Right = pivot->Left;
+	if (pivot->Left != NULL)
+		pivot->Left->Parent = parent;
 	pivot->Parent = parent->Parent;
+	parent->Parent = pivot;
 	pivot->Left = parent;
-	pivot->Left->Parent = pivot;
-
 	return pivot;
 }
 
@@ -285,9 +286,11 @@ typename TreeNode<K, V>* Tree<K, V>::RotateL(TreeNode<K, V>* parent)
 {
 	TreeNode<K, V>* pivot = parent->Left;
 	parent->Left = pivot->Right;
+	if (pivot->Right != NULL)
+		pivot->Right->Parent = parent;
 	pivot->Parent = parent->Parent;
+	parent->Parent = pivot;
 	pivot->Right = parent;
-	pivot->Right->Parent = pivot;
 	return pivot;
 }
 

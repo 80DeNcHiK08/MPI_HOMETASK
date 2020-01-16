@@ -32,14 +32,16 @@ int main()
 		counter++;
 	}
 
+	int keytodelete = 22;
+
 	TreeNode<int, int>* result;
-	if (tree.Find(7, result, false))
+	if (tree.Find(keytodelete, result, false))
 		cout << "Success! Value is: " << result->Value << endl;
 	else
 		cout << "There is no value with such key" << endl;
 	tree.PrintLevelOrder();
-	tree.Remove(7);
-	if (tree.Find(7, result, false))
+	tree.Remove(keytodelete);
+	if (tree.Find(keytodelete, result, false))
 		cout << "Success! Value is: " << result->Value << endl;
 	else
 		cout << "There is no value with such key" << endl;
