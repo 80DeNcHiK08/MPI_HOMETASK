@@ -101,47 +101,6 @@ void Tree<K, V>::iterativeInsert(TreeNode<K, V>* node)
 	count++;
 }
 
-/*template<typename K, class V>
-void Tree<K, V>::iterativeRemove(K key)
-{
-	//search node to delete
-	TreeNode<K, V>* current = searchDeep(Root, key);
-	//replace node with min from right route
-	TreeNode<K, V>* min = (current->Right == NULL) ?
-		min = current->Left:
-		getMin(current->Right);
-	current->Value = min->Value;
-	current->Key = min->Key;
-	//deleting node
-	TreeNode<K, V>* parent = min->Parent;
-	parent->Left = NULL;
-	//min->Next->Prev = min->Prev;
-	//min->Prev->Next = min->Next;
-	min = NULL;
-	//rebalance and rebuild tree
-	while (parent != NULL)
-	{
-		parent = balanceTree(parent);
-		if (parent->Parent == NULL)
-		{
-			Root = parent;
-			break;
-		}
-		else
-		{
-			(parent->Key < parent->Parent->Key) ?
-				parent->Parent->Left = parent :
-				parent->Parent->Right = parent;
-			parent = parent->Parent;
-		}
-	}
-	//connectPairs(Root);
-	fillLeftMosts();
-	ReLink(Root);
-	height = LeftMosts.Count();
-	count--;
-	delete min;
-}*/
 
 template<typename K, class V>
 void Tree<K, V>::recursiveRemove(TreeNode<K, V>* parent, TreeNode<K, V>* current, K key)
@@ -193,7 +152,10 @@ void Tree<K, V>::recursiveRemove(TreeNode<K, V>* parent, TreeNode<K, V>* current
 			recursiveRemove(parent, temp, temp->Key);
 		}
 	}
+	fillLeftMosts();
 	connectPairs(Root);
+	height = LeftMosts.Count();
+	count--;
 }
 
 template<typename K, class V>
