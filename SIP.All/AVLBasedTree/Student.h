@@ -1,36 +1,37 @@
 #pragma once
 #include <iostream>
-#include <string>
+#include <windows.h>
+#include <tchar.h>
 
 class Student
 {
 private:
-	std::string FirstName;
-	std::string LastName;
-	std::string MiddleName;
+	const TCHAR* FirstName;
+	LPCTSTR LastName;
+	LPCTSTR MiddleName;
 	unsigned short Birthday;
 	double MidGrade;
 	int compareStudents(Student, Student);
 public:
 	Student();
 	Student(const Student&);
-	Student(std::string fname,
-			std::string lname,
-			std::string mname, 
+	Student(const TCHAR* fname,
+			LPCTSTR lname,
+			LPCTSTR mname, 
 			unsigned short bday,
 			double mgrade);
 	~Student();
 
-	std::string GetFirstName();
-	std::string GetLastName();
-	std::string GetMiddleName();
-	std::string GetFullName();
+	LPCTSTR GetFirstName();
+	LPCTSTR GetLastName();
+	LPCTSTR GetMiddleName();
+	LPCTSTR GetFullName();
 	unsigned short GetBirthday();
 	double GetMidGrade();
 
-	void SetFirstName(std::string fname);
-	void SetLastName(std::string lname);
-	void SetMiddleName(std::string mname);
+	void SetFirstName(LPCTSTR fname);
+	void SetLastName(LPCTSTR lname);
+	void SetMiddleName(LPCTSTR mname);
 	void SetBirthday(unsigned short bday);
 	void SetMidGrade(double mgrade);
 
@@ -42,8 +43,8 @@ public:
 	bool operator < (Student &othstud);
 	bool operator > (Student &othstud);
 
-	friend std::ostream &operator << (std::ostream&, Student&);
-	friend std::istream &operator >> (std::istream&, Student&);
+	friend std::basic_ostream<TCHAR> &operator << (std::basic_ostream<TCHAR> &out, Student&);
+	friend std::basic_istream<TCHAR> &operator >> (std::basic_istream<TCHAR> &in, Student&);
 
 	void PrintAllInfo();
 };

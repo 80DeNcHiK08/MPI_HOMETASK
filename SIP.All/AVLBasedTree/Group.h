@@ -7,10 +7,10 @@ class Group : public Tree<int, Student>
 private:
 	int compareGroups(const Group first, const Group second);
 protected:
-	std::string GroupName;
+	LPCTSTR GroupName;
 public:
 	Group();
-	Group(std::string gname);
+	Group(LPCTSTR gname);
 	Group(const Group& othgroup);
 	~Group();
 	

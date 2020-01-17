@@ -8,10 +8,10 @@ class Faculty : public Tree<int, Group>
 private:
 	int compareFaculty(const Faculty first, const Faculty second);
 protected:
-	std::string FacultyName;
+	LPCTSTR FacultyName;
 public:
 	Faculty();
-	Faculty(std::string fname);
+	Faculty(LPCTSTR fname);
 	Faculty(const Faculty& othfac);
 	~Faculty();
 

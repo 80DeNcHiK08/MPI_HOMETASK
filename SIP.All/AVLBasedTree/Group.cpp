@@ -4,10 +4,10 @@
 
 Group::Group() : Tree<int, Student>()
 {
-	GroupName = "";
+	GroupName = NULL;
 }
 
-Group::Group(std::string gname) : Tree<int, Student>() 
+Group::Group(LPCTSTR gname) : Tree<int, Student>() 
 { 
 	GroupName = gname; 
 }
@@ -19,12 +19,26 @@ Group::Group(const Group& othgroup) : Tree<int, Student>(othgroup)
 
 Group::~Group()
 { 
-	GroupName.clear();
+	GroupName = NULL;
 };
 
 int Group::compareGroups(const Group first, const Group second)
 {
-	return first.GroupName.compare(second.GroupName) > 0 ? 1 : (second.GroupName.compare(first.GroupName) > 0 ? -1 : 0);
+	#ifdef UNICODE
+	if (wcscmp(first.GroupName, second.GroupName) > 0)
+		return 1;
+	else if (wcscmp(first.GroupName, second.GroupName) < 0)
+		return -1;
+	else
+		return 0;
+	#else
+	if (cscmp(first.GroupName, second.GroupName) > 0)
+		return 1;
+	else if (cscmp(first.GroupName, second.GroupName) < 0)
+		return -1;
+	else
+		return 0;
+	#endif;
 }
 
 Group& Group::operator= (const Group& obj) {
@@ -66,7 +80,11 @@ bool Group::operator>(Group& obj)
 }
 
 void Group::PrintAllInfo() {
-	std::cout << "\nGroup Name: " << GroupName;
+	#ifdef UNICODE
+		std::wcout << L"\nGroup Name: " << GroupName;
+	#else
+		std::cout << "\nGroup Name: " << GroupName;
+	#endif // UNICODE
 	for (int i = 0; i < LeftMosts.Count(); i++)
 	{
 		TreeNode<int, Student>* hcurrent = LeftMosts.GetValue(i);

@@ -4,10 +4,10 @@
 
 Faculty::Faculty() : Tree<int, Group>() 
 { 
-	FacultyName = ""; 
+	FacultyName = NULL; 
 }
 
-Faculty::Faculty(std::string fname) : Tree<int, Group>() 
+Faculty::Faculty(LPCTSTR fname) : Tree<int, Group>()
 { 
 	FacultyName = fname; 
 }
@@ -19,14 +19,26 @@ Faculty::Faculty(const Faculty& othfac) : Tree<int, Group>(othfac)
 
 Faculty::~Faculty() 
 { 
-	FacultyName.clear();
+	FacultyName = NULL;
 }
 
 int Faculty::compareFaculty(const Faculty first, const Faculty second)
 {
-	return first.FacultyName.compare(second.FacultyName) > 0 ? 
-		1 : 
-		(second.FacultyName.compare(first.FacultyName) > 0 ? -1 : 0);
+	#ifdef UNICODE
+	if (wcscmp(first.FacultyName, second.FacultyName) > 0)
+		return 1;
+	else if (wcscmp(first.FacultyName, second.FacultyName) < 0)
+		return -1;
+	else
+		return 0;
+	#else
+	if (cscmp(first.FacultyName, second.FacultyName) > 0)
+		return 1;
+	else if (cscmp(first.FacultyName, second.FacultyName) < 0)
+		return -1;
+	else
+		return 0;
+	#endif;
 }
 
 Faculty& Faculty::operator = (const Faculty& obj) {
@@ -68,7 +80,11 @@ bool Faculty::operator > (Faculty& obj)
 }
 
 void Faculty::PrintAllInfo() {
-	std::cout << "FacultyName: " << FacultyName;
+	#ifdef UNICODE
+		std::wcout << L"FacultyName: " << FacultyName;
+	#else
+		std::cout << "FacultyName: " << FacultyName;
+	#endif // UNICODE
 	for (int i = 0; i < LeftMosts.Count(); i++)
 	{
 		TreeNode<int, Group>* hcurrent = LeftMosts.GetValue(i);

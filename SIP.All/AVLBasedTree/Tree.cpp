@@ -350,7 +350,6 @@ void Tree<K, V>::connectPairs(TreeNode<K, V> *temp) {
 		}
 		else {
 			if (prev != NULL) {
-				//std::cout << "link" << prev->Key << " to " << current->Key << std::endl;
 				prev->Next = current;
 			}
 
@@ -418,12 +417,14 @@ void Tree<K, V>::PrintLevelOrder()
 	for (int i = 0; i < LeftMosts.Count(); i++)
 	{
 		TreeNode<K, V>* hcurrent = LeftMosts.GetValue(i);
+		for (int j = 0; j < offset; j++)
+			std::cout << "      ";
 		while (hcurrent != NULL)
-		{
+		{			
+			std::cout << hcurrent->Key;
+
 			for (int j = 0; j < offset; j++)
 				std::cout << "   ";
-			
-			std::cout << hcurrent->Key << "  ";
 
 			hcurrent = hcurrent->Next;
 		}
