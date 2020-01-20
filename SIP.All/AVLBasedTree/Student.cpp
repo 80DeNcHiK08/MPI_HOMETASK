@@ -17,12 +17,9 @@ Student::Student(LPCTSTR fname,
 				 unsigned short bday,
 	double mgrade)
 {
-	FirstName = new TCHAR[_tcsclen(fname) + 1];
-	LastName = new TCHAR[_tcsclen(lname) + 1];
-	MiddleName = new TCHAR[_tcsclen(mname) + 1];
-	_tcscpy(FirstName, fname);
-	_tcscpy(LastName, lname);
-	_tcscpy(MiddleName, mname);
+	this->SetLastName(lname);
+	this->SetFirstName(fname);
+	this->SetMiddleName(mname);
 	Birthday = bday;
 	MidGrade = mgrade;
 }
@@ -34,9 +31,6 @@ Student::Student(const Student& othStud)
 
 Student::~Student()
 {
-	//delete[] LastName;
-	//delete[] FirstName;
-	//delete[] MiddleName;
 	LastName = NULL;
 	FirstName = NULL;
 	MiddleName = NULL;
@@ -56,18 +50,6 @@ LPCTSTR Student::GetMiddleName()
 {
 	return MiddleName;
 }
-
-/*LPCTSTR Student::GetFullName()
-{
-	LPCTSTR result = NULL;
-	TCHAR buff[255] = { '\0' };
-	result = lstrcat(buff, LastName);
-	result = lstrcat(buff, _T(" "));
-	result = lstrcat(buff, (LPTSTR)FirstName);
-	result = lstrcat(buff, _T(" "));
-	result = lstrcat(buff, (LPTSTR)MiddleName);
-	return result;
-}*/
 
 unsigned short Student::GetBirthday()
 {
