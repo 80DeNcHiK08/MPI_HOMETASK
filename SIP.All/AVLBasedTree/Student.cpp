@@ -11,7 +11,7 @@ Student::Student()
 	MidGrade = 0;
 }
 
-Student::Student(const TCHAR* fname,
+Student::Student(LPCTSTR fname,
 				 LPCTSTR lname,
 				 LPCTSTR mname,
 				 unsigned short bday,
@@ -53,11 +53,13 @@ LPCTSTR Student::GetMiddleName()
 
 LPCTSTR Student::GetFullName()
 {
-	LPCTSTR result = LastName;
-	result = lstrcat((LPTSTR)result, _T(" "));
-	result = lstrcat((LPTSTR)result, (LPTSTR)FirstName);
-	result = lstrcat((LPTSTR)result, _T(" "));
-	result = lstrcat((LPTSTR)result, (LPTSTR)MiddleName);
+	LPCTSTR result = NULL;
+	TCHAR buff[255] = { '\0' };
+	result = lstrcat(buff, LastName);
+	result = lstrcat(buff, _T(" "));
+	result = lstrcat(buff, (LPTSTR)FirstName);
+	result = lstrcat(buff, _T(" "));
+	result = lstrcat(buff, (LPTSTR)MiddleName);
 	return result;
 }
 
@@ -98,18 +100,22 @@ void Student::SetMidGrade(double mgrade)
 
 std::basic_ostream<TCHAR> &operator << (std::basic_ostream<TCHAR> &out, Student& student)
 {
-	LPCTSTR result = _T("\n");
-	result = lstrcat((LPTSTR)result, student.FirstName);
-	result = lstrcat((LPTSTR)result, _T(" "));
-	result = lstrcat((LPTSTR)result, student.FirstName);
-	result = lstrcat((LPTSTR)result, _T(" "));
-	result = lstrcat((LPTSTR)result, student.MiddleName);
-	result = lstrcat((LPTSTR)result, _T(" Birthday: "));
-	result = lstrcat((LPTSTR)result, (LPCTSTR)student.Birthday);
-	result = lstrcat((LPTSTR)result, _T(" Middle grade: "));
-	TCHAR szBuff[32];
+	LPCTSTR result = NULL;
+	TCHAR buff[255] = { '\0' };
+	result = lstrcat(buff, _T("\n"));
+	result = lstrcat(buff, student.FirstName);
+	result = lstrcat(buff, _T(" "));
+	result = lstrcat(buff, student.FirstName);
+	result = lstrcat(buff, _T(" "));
+	result = lstrcat(buff, student.MiddleName);
+	result = lstrcat(buff, _T(" Birthday: "));
+	TCHAR szBuff1[8] = { '\0' };
+	_tprintf(szBuff1, "%f", student.Birthday);
+	result = lstrcat(buff, szBuff1);
+	result = lstrcat(buff, _T(" Middle grade: "));
+	TCHAR szBuff[32] = {'\0'};
 	_tprintf(szBuff, "%f", student.MidGrade);
-	result = lstrcat((LPTSTR)result, szBuff);
+	result = lstrcat(buff, szBuff);
 	return out << result;
 }
 
@@ -142,12 +148,16 @@ Student& Student::operator = (const Student& obj)
 
 int Student::compareStudents(const Student first, const Student second)
 {
-	LPCTSTR _compiledfirst = first.LastName;
-	_compiledfirst = lstrcat((LPTSTR)_compiledfirst, first.MiddleName);
-	_compiledfirst  = lstrcat((LPTSTR)_compiledfirst, first.FirstName);
-	LPCTSTR _compiledsecond = second.LastName;
-	_compiledsecond = lstrcat((LPTSTR)_compiledsecond, second.MiddleName);
-	_compiledsecond = lstrcat((LPTSTR)_compiledsecond, second.MiddleName);
+	LPCTSTR _compiledfirst = NULL;
+	TCHAR szBuff[255] = {'\0'};
+	_compiledfirst = lstrcat(szBuff, first.LastName);
+	_compiledfirst = lstrcat(szBuff, first.MiddleName);
+	_compiledfirst = lstrcat(szBuff, first.FirstName);
+	LPCTSTR _compiledsecond = NULL;
+	TCHAR szBuff2[255] = { '\0' };
+	_compiledsecond = lstrcat(szBuff2, second.LastName);
+	_compiledsecond = lstrcat(szBuff2, second.MiddleName);
+	_compiledsecond = lstrcat(szBuff2, second.FirstName);
 	#ifdef UNICODE
 	if (wcscmp(_compiledfirst, _compiledsecond) > 0)
 		return 1;
@@ -156,9 +166,9 @@ int Student::compareStudents(const Student first, const Student second)
 	else
 		return 0;
 	#else
-	if (cscmp(_compiledfirst, _compiledsecond) > 0)
+	if (strcmp(_compiledfirst, _compiledsecond) > 0)
 		return 1;
-	else if (cscmp(_compiledfirst, _compiledsecond) < 0)
+	else if (strcmp(_compiledfirst, _compiledsecond) < 0)
 		return -1;
 	else
 		return 0;
