@@ -148,14 +148,7 @@ int Student::compareStudents(const Student first, const Student second)
 	{
 		if (tscmp(first.MiddleName, second.MiddleName) < 0)
 		{
-			if (tscmp(first.FirstName, second.FirstName) < 0)
-			{
-				return -1;
-			}
-			else if(tscmp(first.FirstName, second.FirstName) > 0)
-				return 1;
-			else 
-				return 0;
+			return tscmp(first.FirstName, second.FirstName);
 		}
 		else if(tscmp(first.MiddleName, second.MiddleName) > 0)
 			return 1;
