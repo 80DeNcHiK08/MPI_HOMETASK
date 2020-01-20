@@ -403,10 +403,8 @@ bool Tree<K, V>::Find(V value, bool searchType)
 template<class K, class V>
 typename Tree<K, V>& Tree<K, V>::operator= (const Tree<K, V>& obj)
 {
-	if (this == &obj)
-		return *this;
-	
-	Root = obj.Root;
+	//Root = obj.getNodeCopy(Root);
+
 	return *this;
 }
 

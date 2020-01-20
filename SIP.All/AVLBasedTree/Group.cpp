@@ -24,21 +24,12 @@ Group::~Group()
 
 int Group::compareGroups(const Group first, const Group second)
 {
-	#ifdef UNICODE
-	if (wcscmp(first.GroupName, second.GroupName) > 0)
+	if (tscmp(first.GroupName, second.GroupName) > 0)
 		return 1;
-	else if (wcscmp(first.GroupName, second.GroupName) < 0)
+	else if (tscmp(first.GroupName, second.GroupName) < 0)
 		return -1;
 	else
 		return 0;
-	#else
-	if (cscmp(first.GroupName, second.GroupName) > 0)
-		return 1;
-	else if (cscmp(first.GroupName, second.GroupName) < 0)
-		return -1;
-	else
-		return 0;
-	#endif;
 }
 
 Group& Group::operator= (const Group& obj) {

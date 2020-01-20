@@ -16,6 +16,7 @@ private:
 	void iterativeInsert(TreeNode<K, V>* node);
 	TreeNode<K, V>* newNode(V value, K key = NULL);
 	TreeNode<K, V>* deleteTree(TreeNode<K, V>* node);
+	TreeNode<K, V>* getNodeCopy(TreeNode<K, V>* root);
 
 	void recursiveRemove(TreeNode<K, V>* parent, TreeNode<K, V>* current, K key);
 

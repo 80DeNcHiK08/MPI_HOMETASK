@@ -24,21 +24,12 @@ Faculty::~Faculty()
 
 int Faculty::compareFaculty(const Faculty first, const Faculty second)
 {
-	#ifdef UNICODE
-	if (wcscmp(first.FacultyName, second.FacultyName) > 0)
+	if (tscmp(first.FacultyName, second.FacultyName) > 0)
 		return 1;
-	else if (wcscmp(first.FacultyName, second.FacultyName) < 0)
+	else if (tscmp(first.FacultyName, second.FacultyName) < 0)
 		return -1;
 	else
 		return 0;
-	#else
-	if (cscmp(first.FacultyName, second.FacultyName) > 0)
-		return 1;
-	else if (cscmp(first.FacultyName, second.FacultyName) < 0)
-		return -1;
-	else
-		return 0;
-	#endif;
 }
 
 Faculty& Faculty::operator = (const Faculty& obj) {
